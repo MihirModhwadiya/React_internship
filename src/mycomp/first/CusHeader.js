@@ -1,7 +1,7 @@
 import React from "react";
 
-const CusHeader = () => {
-  return <h1 className="text-center">Hello world</h1>;
+const CusHeader = (props) => {
+  return <h1 className="text-center">{props.text}</h1>;
 };
 
 export default CusHeader;
