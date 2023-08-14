@@ -1,14 +1,7 @@
 import React from "react";
 import "./Chat.css"; // Assuming you have a CSS file for the Chat component
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faMessage,
-  faPaperPlane,
-  faSearch,
-  faShare,
-  faTentArrowLeftRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const Chat = ({ sidebarOpen }) => {
   return (
@@ -18,9 +11,8 @@ const Chat = ({ sidebarOpen }) => {
       </div>
       <div
         className={`chat-inputs btn-group position-fixed bottom-0 d-flex align-items-end p-3 ${
-          sidebarOpen ? "sidebar-open" : ""
+          sidebarOpen ? "sidebar-open" : "sidebar-close"
         }`}
-        style={{ width: sidebarOpen ? "calc(97% - 250px)" : "97%" }}
       >
         <input
           type="text"

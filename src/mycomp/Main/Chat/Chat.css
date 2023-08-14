@@ -1,17 +1,44 @@
 .chat-block {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Adjust the height as needed */
+  height: 100vh;
 }
 
 .chat-body {
-  /* Styles for chat messages */
-  flex: 1; /* This will make the chat-body take up the available vertical space */
-  overflow-y: auto; /* Enable vertical scrolling if content exceeds the container */
-}
-.chat-block {
-  padding-right: 250px; /* Adjust this value to match the width of the expanded sidebar */
+  flex: 1;
+  overflow-y: auto;
 }
 
-/* ----------------------- */
+.sidebar-open {
+  width: calc(97% - 250px);
+}
+.sidebar-close {
+  width: 97%;
+}
 
+@media screen and (max-width: 425px) and (min-width: 0px) {
+  .sidebar-open {
+    width: calc(22rem + 12px);
+  }
+  .sidebar-close {
+    width: calc(24rem - 2mm);
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 426px) {
+  .sidebar-open {
+    width: calc(93% - 240px);
+  }
+  .sidebar-close {
+    width: 94%;
+  }
+}
+
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+  .sidebar-open {
+    width: calc(96% - 255px);
+  }
+  .sidebar-close {
+    width: 96%;
+  }
+}

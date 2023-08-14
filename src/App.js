@@ -3,54 +3,39 @@ import "./App.css";
 import Header from "./mycomp/Header/Header";
 import Chat from "./mycomp/Main/Chat/Chat";
 import SideBar from "./mycomp/Main/SideBar/SideBar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-
+import SideBarMain from "./mycomp/Main/SideBarMain/SideBarMain"; // Import the ToggleButton component
 function App() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  const handleSidebarToggle = () => {
-    setSidebarOpen(!sidebarOpen);
+  const handleSidebarToggle = (newSidebarOpen) => {
+    setSidebarOpen(newSidebarOpen);
   };
 
   return (
-    <body className="d-flex bg-dark">
-      <div className="bg-primary">
-        <div className="text-light">
-          <a
-            className="navbar-toggler p-3"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseExample"
-            aria-controls="collapseExample"
-            aria-expanded="false"
-            aria-label="Toggle sidebar"
-            onClick={handleSidebarToggle}
-          >
-            <FontAwesomeIcon icon={faBars} />
-          </a>
-        </div>
-      </div>
+    <>
+      <body className="d-flex bg-dark">
+        <SideBarMain onToggle={handleSidebarToggle} />
 
-      <div
-        className={`collapse sidebar bg-dark ${sidebarOpen ? "show" : ""}`}
-        id="collapseExample"
-      >
-        <div>
-          <SideBar />
+        <div
+          className={`collapse sidebar bg-dark ${sidebarOpen ? "show" : ""}`}
+          id="collapseExample"
+        >
+          <div>
+            <SideBar />
+          </div>
         </div>
-      </div>
 
-      <main
-        className={`main position-relative ${
-          sidebarOpen ? "sidebar-open" : ""
-        }`}
-      >
-        <div className="chat">
-          <Chat sidebarOpen={sidebarOpen} />
-        </div>
-      </main>
-    </body>
+        <main
+          className={`main position-relative ${
+            sidebarOpen ? "sidebar-open" : ""
+          }`}
+        >
+          <div className="chat">
+            <Chat sidebarOpen={sidebarOpen} />
+          </div>
+        </main>
+      </body>
+    </>
   );
 }
 
