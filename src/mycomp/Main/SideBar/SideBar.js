@@ -1,14 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChartBar,
-  faChartLine,
-  faChartPie,
-  faGlobe,
-  faSearch,
-  faTachometerAltAverage,
-} from "@fortawesome/free-solid-svg-icons";
-import { faChartArea } from "@fortawesome/free-solid-svg-icons";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
 import "./SideBar.css";
 
 const SideBar = () => {
