@@ -2,19 +2,18 @@ import "./SideBar.css";
 
 const SideBar = () => {
   return (
-    <nav id="sidebarMenu" classNameNameName="sidebar">
+    <nav id="sidebarMenu" className="sidebar">
       <div className="position-sticky">
         <div className="list-group list-group-flush">
-          <div classNameName="search text-center btn-group mx-3">
+          <div className="search text-center btn-group mx-3 mt-3">
             <input
               type="text"
               placeholder="Search"
-              classNameName="form-control border-1 border-black"
+              className="form-control shadow-none"
             />
-            {/* <button classNameName="btn btn-primary rounded-0"><FontAwesomeIcon icon={faSearch}/></button> */}
           </div>
 
-          <div classNameName="mt-4 mx-1">
+          <div className="mt-4 mx-1">
             <button className="list-group-item list-group-item-action py-2 ripple">
               <span>Mihir</span>
             </button>
