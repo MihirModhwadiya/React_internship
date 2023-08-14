@@ -1,5 +1,5 @@
 import React from "react";
-import "./Chat.css"; // Assuming you have a CSS file for the Chat component
+import "./Chat.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 

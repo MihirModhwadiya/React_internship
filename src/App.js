@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./mycomp/Header/Header";
 import Chat from "./mycomp/Main/Chat/Chat";
 import SideBar from "./mycomp/Main/SideBar/SideBar";
-import SideBarMain from "./mycomp/Main/SideBarMain/SideBarMain"; // Import the ToggleButton component
+import SideBarMain from "./mycomp/Main/SideBarMain/SideBarMain";
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
