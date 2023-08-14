@@ -4,7 +4,7 @@ import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const SideBar = () => {
   return (
-    <div className="mt-3 position-absolute">
+    <div className="mt-3 position-relative">
       <div className="btn-group d-flex justify-content-center p-3">
         <input
           className="form-control shadow-none rounded-end-0"

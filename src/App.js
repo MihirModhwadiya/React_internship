@@ -14,7 +14,7 @@ function App() {
   };
 
   return (
-    <body className="d-flex">
+    <body className="d-flex bg-dark">
       <div className="bg-primary">
         <div className="text-light">
           <a
@@ -36,7 +36,9 @@ function App() {
         className={`collapse sidebar bg-dark ${sidebarOpen ? "show" : ""}`}
         id="collapseExample"
       >
-        <SideBar />
+        <div>
+          <SideBar />
+        </div>
       </div>
 
       <main
