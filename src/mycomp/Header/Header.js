@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <nav className="navbar bg-dark">
       <div>
-        <a
+        {/* <a
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -16,7 +16,7 @@ const Header = () => {
           aria-label="Toggle sidebar"
         >
           <FontAwesomeIcon icon={faBars} />
-        </a>
+        </a> */}
       </div>
     </nav>
   );

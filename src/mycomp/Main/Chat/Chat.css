@@ -1,11 +1,17 @@
 .chat-block {
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* Adjust the height as needed */
-  }
-  
-  .chat-body {
-    /* Styles for chat messages */
-    flex: 1; /* This will make the chat-body take up the available vertical space */
-    overflow-y: auto; /* Enable vertical scrolling if content exceeds the container */
-  }
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Adjust the height as needed */
+}
+
+.chat-body {
+  /* Styles for chat messages */
+  flex: 1; /* This will make the chat-body take up the available vertical space */
+  overflow-y: auto; /* Enable vertical scrolling if content exceeds the container */
+}
+.chat-block {
+  padding-right: 250px; /* Adjust this value to match the width of the expanded sidebar */
+}
+
+/* ----------------------- */
+
