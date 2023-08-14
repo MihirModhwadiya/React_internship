@@ -1,22 +1,11 @@
-.chat {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  height: 100%;
-}
-
-.chat-header {
-  height: 60px;
-  background-color: #f0f0f0;
-}
-
-.chat-messages {
-  flex: 1;
-  overflow-y: auto;
-}
-
-.chat-input {
-  background-color: #fff;
-  padding: 10px;
-  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
-}
+.chat-block {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Adjust the height as needed */
+  }
+  
+  .chat-body {
+    /* Styles for chat messages */
+    flex: 1; /* This will make the chat-body take up the available vertical space */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds the container */
+  }

@@ -2,18 +2,22 @@ import "./App.css";
 import Header from "./mycomp/Header/Header";
 import Chat from "./mycomp/Main/Chat/Chat";
 import SideBar from "./mycomp/Main/SideBar/SideBar";
-import Footer from "./mycomp/Footer/Footer";
 
 function App() {
   return (
-    <div className="app-container">
-      <div className="sidebar-container">
+    <body className="d-flex">
+      <div className="collapse sidebar" id="collapseExample">
         <SideBar />
       </div>
-      <div className="chat-container">
-        <Chat />
-      </div>
-    </div>
+      <main className="main position-relative">
+        <div className="header">
+          <Header />
+        </div>
+        <div className="chat">
+          <Chat />
+        </div>
+      </main>
+    </body>
   );
 }
 

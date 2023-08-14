@@ -1,12 +1,17 @@
 const Chat = () => {
   return (
-    <div className="chat">
-      <div className="chat-header">{/* Chat header content */}</div>
-      <div className="chat-messages">{/* Chat messages */}</div>
-      <div className="chat-input">
-        <input type="text" className="form-control" />
+    <>
+      <div className="chat-block">
+        <div className="chat-body"></div>
       </div>
-    </div>
+      <div className="chat-inputs position-fixed bottom-0 d-flex flex-column align-items-end p-3">
+        <input
+          type="text"
+          placeholder="Message"
+          className="form-control shadow-none"
+        />
+      </div>
+    </>
   );
 };
 

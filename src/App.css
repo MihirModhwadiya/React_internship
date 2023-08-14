@@ -1,20 +1,23 @@
-.app-container {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.sidebar-container {
-  width: 300px;
-  flex-shrink: 0;
-  overflow-y: auto;
-  background-color: #f0f0f0;
-}
-
-.chat-container {
+main {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  justify-content: end;
+  height: 100vh;
+  width: 100;
+}
+.sidebar {
+  height: 100vh;
+  width: 250px;
+  background-color: #333;
+  color: white;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+.sidebar.show {
+  transform: translateX(0);
+}
+
+.chat-inputs {
+  width: 100%; /* Take the full width of the screen */
+  background-color: white; /* Set the desired background color */
+  border-top: 1px solid #ccc; /* Add a top border for separation */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the bottom */
 }
