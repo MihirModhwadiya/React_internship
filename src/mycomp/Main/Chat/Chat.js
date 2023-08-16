@@ -6,11 +6,22 @@ import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 const Chat = ({ sidebarOpen }) => {
   return (
     <>
-      <div className={`chat-block ${sidebarOpen ? "sidebar-open" : ""}`}>
-        <div className="chat-body"></div>
+      <div className={`chat-block d-flex`}>
+        <div className="chat-body d-column-flex">
+          <div className="d-flex justify-content-start py-3">hi</div>
+          <div className="d-flex justify-content-end py-3">hi</div>
+          <div className="d-flex justify-content-start py-3">hi</div>
+          <div className="d-flex justify-content-end py-3">hi</div>
+          <div className="d-flex justify-content-start py-3">hi</div>
+        </div>
+        {/* <div className="chat-body d-column-flex">
+          <div className="d-flex justify-content-end py-3">hi</div>
+          <div className="d-flex justify-content-end py-3">hi</div>
+          <div className="d-flex justify-content-end py-3">hi</div>
+        </div> */}
       </div>
       <div
-        className={`chat-inputs btn-group position-fixed bottom-0 d-flex align-items-end p-3 ${
+        className={`chat-inputs btn-group position-fixed end-0 bottom-0 d-flex align-items-start p-3 ${
           sidebarOpen ? "sidebar-open" : "sidebar-close"
         }`}
       >
