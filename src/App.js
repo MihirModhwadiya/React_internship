@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
-import Auth from "./mycomp/Auth/auth";
+import Auth from "./mycomp/Auth/Authcomp";
 import Body from "./mycomp/body/Body";
 import { BrowserRouter as Main, Route, Routes } from "react-router-dom";
 import SideBarMain from "./mycomp/Main/SideBarMain/SideBarMain";
