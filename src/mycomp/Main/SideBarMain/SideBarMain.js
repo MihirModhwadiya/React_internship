@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { faBars, faHome, faSignIn } from "@fortawesome/free-solid-svg-icons";
 
 const SideBarMain = ({ onToggle }) => {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  // const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const handleToggleClick = () => {
-    setSidebarOpen(!sidebarOpen);
-    onToggle(!sidebarOpen);
+    // setSidebarOpen(!sidebarOpen);
+    onToggle();
   };
 
   return (
     <div className="bg-primary">
-      <div className="text-light">
+      <div className="text-light" style={{ height: "700vh" }}>
         <button
           className="navbar-toggler p-3"
           type="button"
@@ -22,12 +21,14 @@ const SideBarMain = ({ onToggle }) => {
           <FontAwesomeIcon icon={faBars} />
         </button>
         <br />
-        <a href="/auth" className="btn">
-          Auth
+
+        <a href="/Body" className="btn text-light">
+          <FontAwesomeIcon icon={faHome}/>
         </a>
         <br />
-        <a href="/auth" className="btn">
-          Home
+        
+        <a href="/auth" className="btn text-light">
+          <FontAwesomeIcon icon={faSignIn}/>
         </a>
         <br />
       </div>

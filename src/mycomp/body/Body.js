@@ -6,12 +6,13 @@ import SideBar from "../Main/SideBar/SideBar";
 import SideBarMain from "../Main/SideBarMain/SideBarMain";
 import { motion } from "framer-motion";
 
-function Body() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+function Body({ sidebarOpen }) {
+  // const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  const handleSidebarToggle = (newSidebarOpen) => {
-    setSidebarOpen(newSidebarOpen);
-  };
+  // const handleSidebarToggle = (newSidebarOpen) => {
+  //   setSidebarOpen(newSidebarOpen);
+  //   onToggle(!sidebarOpen);
+  // };
 
   const variants = {
     open: { opacity: 1, x: 0 },
@@ -22,7 +23,7 @@ function Body() {
 
   return (
     <body className="d-flex">
-      <SideBarMain onToggle={handleSidebarToggle} />
+      {/* <SideBarMain onToggle={handleSidebarToggle} /> */}
       <motion.div
         variants={variants}
         initial="closed"
@@ -47,6 +48,6 @@ function Body() {
       </main>
     </body>
   );
-};
+}
 
 export default Body;
