@@ -4,7 +4,9 @@ import Header from "./mycomp/Header/Header";
 import Chat from "./mycomp/Main/Chat/Chat";
 import SideBar from "./mycomp/Main/SideBar/SideBar";
 import SideBarMain from "./mycomp/Main/SideBarMain/SideBarMain";
+import Auth from "./mycomp/Auth/auth";
 import { motion } from "framer-motion";
+import { BrowserRouter as Main, Route, Routes } from "react-router-dom";
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -22,6 +24,7 @@ function App() {
 
   return (
     <>
+    <Main>
       <body className="d-flex">
         <SideBarMain onToggle={handleSidebarToggle} />
         <motion.div
@@ -47,6 +50,10 @@ function App() {
           </div>
         </main>
       </body>
+      <Routes>
+        <Route exact path="/auth" element={<Auth />} />
+      </Routes>
+      </Main>
     </>
   );
 }
