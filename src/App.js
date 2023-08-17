@@ -27,9 +27,10 @@ function App() {
 
   const transition = { damping: 0, duration: 0.1 };
   const { isAuth } = useContext(AuthContext);
+
   const ProtectedRoute = ({ children }) => {
-    if (isAuth == false) {
-      return <Navigate to="/authcomp" />;
+    if (!isAuth) {
+      return <Navigate to="/Authcomp" />;
     }
     return children;
   };
