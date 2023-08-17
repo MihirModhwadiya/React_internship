@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faHome, faSignIn, faSignOut } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBars,
+  faHome,
+  faPerson,
+  faSignIn,
+  faSignOut,
+} from "@fortawesome/free-solid-svg-icons";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../config/firebase";
+import { AuthContext } from "../../Auth/AuthContext/AuthContext";
 
 const SideBarMain = ({ onToggle }) => {
   // const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -11,6 +18,7 @@ const SideBarMain = ({ onToggle }) => {
     // setSidebarOpen(!sidebarOpen);
     onToggle();
   };
+  const { isAuth } = useContext(AuthContext);
 
   return (
     <div className="bg-primary">
@@ -25,23 +33,29 @@ const SideBarMain = ({ onToggle }) => {
         <br />
 
         <a href="/Body" className="btn text-light">
-          <FontAwesomeIcon icon={faHome}/>
+          <FontAwesomeIcon icon={faHome} />
         </a>
         <br />
-        
+
         <a href="/Authcomp" className="btn text-light">
-          <FontAwesomeIcon icon={faSignIn}/>
+          <FontAwesomeIcon icon={faPerson} />
         </a>
         <br />
 
         <a href="/AuthLogIn" className="btn text-light">
-          <FontAwesomeIcon icon={faSignIn}/>
+          <FontAwesomeIcon icon={faSignIn} />
         </a>
         <br />
-        
-        <a className="btn text-light" onClick={()=>signOut(auth)}>
-          <FontAwesomeIcon icon={faSignOut}/>
+
+        <a className="btn text-light" onClick={() => signOut(auth)}>
+          <FontAwesomeIcon icon={faSignOut} />
         </a>
+        <br />
+        {isAuth ? (
+          <a className="btn text-light position-fixed bottom-0 mb-3">
+            <img src={isAuth.photoURL} width="30px" />
+          </a>
+        ) : null}
         <br />
       </div>
     </div>

@@ -1,26 +1,25 @@
+// solve error in this code
+
 import "./Authcomp.css";
 import { auth, storage, db } from "../../config/firebase";
-import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 const Authcomp = () => {
-  const [username, setUsername] = useState("");
+  const [displayName, setdisplayName] = useState("");
   const [email, setEmail] = useState("");
-  const [userPhoto, setuserPhoto] = useState("");
+  const [photoURL, setphotoURL] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const signUp = async () => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      const storageRef = ref(storage, username);
-      const uploadTask = uploadBytesResumable(storageRef, userPhoto);
+      const storageRef = ref(storage, displayName);
+      const uploadTask = uploadBytesResumable(storageRef, photoURL);
 
       uploadTask.on(
         (error) => {
@@ -29,18 +28,15 @@ const Authcomp = () => {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             await updateProfile(res.user, {
-              username,
-              userPhoto: downloadURL,
+              displayName,
+              photoURL: downloadURL,
             });
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
-              username,
+              displayName,
               email,
-              userPhoto: downloadURL,
+              photoURL: downloadURL,
             });
-            await setDoc(doc(db, "userchats", res.user.uid), {
-            });
-            navigate("/");
           });
         }
       );
@@ -57,8 +53,8 @@ const Authcomp = () => {
           <input
             className="form-control my-3 shadow-none"
             type="text"
-            placeholder="Username"
-            onChange={(e) => setUsername(e.target.value)}
+            placeholder="displayName"
+            onChange={(e) => setdisplayName(e.target.value)}
           />
           <input
             className="form-control my-3 shadow-none"
@@ -69,7 +65,7 @@ const Authcomp = () => {
           <input
             className="form-control my-3 shadow-none"
             type="file"
-            onChange={(e) => setuserPhoto(e.target.files[0])}
+            onChange={(e) => setphotoURL(e.target.files[0])}
           />
           <input
             className="form-control my-3 shadow-none"

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./App.css";
 import Authcomp from "./mycomp/Auth/Authcomp";
 import AuthLogIn from "./mycomp/Auth/LogIn/AuthLogIn";
@@ -30,7 +30,7 @@ function App() {
 
   const ProtectedRoute = ({ children }) => {
     if (!isAuth) {
-      return <Navigate to="/Authcomp" />;
+      return <Navigate to="/AuthLogIn" />;
     }
     return children;
   };
@@ -45,9 +45,10 @@ function App() {
             {/* <Route path="/"> */}
             <Route
               // exact
-              index="/Body"
+              index
               // path="/Body"
               element={
+                //make given code loads only one time it is loading 2 timesl
                 <ProtectedRoute>
                   <Body sidebarOpen={sidebarOpen} />
                 </ProtectedRoute>
