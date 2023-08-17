@@ -23,18 +23,20 @@ function App() {
     <>
       <Main>
         <div className="d-flex">
-          {/* <div className="bg-primary">  */}
-          <SideBarMain
-            onToggle={handleSidebarToggle}
-          />
-          {/* </div> */}
+          <SideBarMain onToggle={handleSidebarToggle} />
+          
           <Routes>
+            <Route
+              // exact
+              index="/body"
+              element={<Body sidebarOpen={sidebarOpen} />}
+            />
+            <Route exact path="/auth" element={<Auth />} />
             <Route
               exact
               path="/body"
               element={<Body sidebarOpen={sidebarOpen} />}
             />
-            <Route exact path="/auth" element={<Auth />} />
           </Routes>
         </div>
       </Main>

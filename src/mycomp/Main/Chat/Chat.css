@@ -17,14 +17,15 @@
   transition: width 0.5s;
 }
 
-@media screen and (max-width: 600px) and (min-width: 425px) {
+@media screen and (max-width: 380px) and (min-width: 200px) {
   .sidebar-open {
-    width: calc(90% + 10px);
+    width: calc(80% + 10px);
   }
   .sidebar-close {
-    width: calc(90% + 10px);
+    width: calc(82% + 20px);
   }
 }
+
 @media screen and (max-width: 425px) and (min-width: 380px) {
   .sidebar-open {
     width: calc(85% + 10px);
@@ -33,12 +34,13 @@
     width: calc(85% + 15px);
   }
 }
-@media screen and (max-width: 380px) and (min-width: 200px) {
+
+@media screen and (max-width: 600px) and (min-width: 425px) {
   .sidebar-open {
-    width: calc(80% + 10px);
+    width: calc(90% + 10px);
   }
   .sidebar-close {
-    width: calc(82% + 20px);
+    width: calc(90% + 10px);
   }
 }
 
@@ -51,7 +53,7 @@
   }
 }
 
-@media screen and (max-width: 1024px) and (min-width: 769px) {
+@media screen and (max-width: 1024px) and (min-width: 768px) {
   .sidebar-open {
     width: calc(96% - 255px);
   }
