@@ -3,7 +3,7 @@ import "./Body.css";
 // import Header from "../Header/Header";
 import Chat from "../Main/Chat/Chat";
 import SideBar from "../Main/SideBar/SideBar";
-import SideBarMain from "../Main/SideBarMain/SideBarMain";
+// import SideBarMain from "../Main/SideBarMain/SideBarMain";
 import { motion } from "framer-motion";
 
 function Body({ sidebarOpen }) {

@@ -2,7 +2,6 @@ import "./Authcomp.css";
 import { auth, storage, db } from "../../config/firebase";
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -15,10 +14,10 @@ const Authcomp = () => {
   const [email, setEmail] = useState("");
   const [userPhoto, setuserPhoto] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const signUp = async () => {
     try {
-      // const navigator = useNavigate();
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const storageRef = ref(storage, username);
       const uploadTask = uploadBytesResumable(storageRef, userPhoto);
@@ -39,21 +38,13 @@ const Authcomp = () => {
               email,
               userPhoto: downloadURL,
             });
-            // await setDoc(doc(db, "userchats", res.user.uid), {
-
-            // });
+            await setDoc(doc(db, "userchats", res.user.uid), {
+            });
+            navigate("/");
           });
         }
       );
       alert("successfully signed up");
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-  const signIn = async () => {
-    try {
-      const logg = await signInWithEmailAndPassword(auth, email, password);
-      alert("Sign in successful " + logg.user.email);
     } catch (error) {
       alert(error.message);
     }
@@ -89,9 +80,6 @@ const Authcomp = () => {
           <div className="text-center d-flex justify-content-between">
             <button onClick={signUp} className="btn btn-primary">
               Sign up
-            </button>
-            <button onClick={signIn} className="btn btn-primary">
-              Sign In
             </button>
           </div>
         </div>

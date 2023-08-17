@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faHome, faSignIn } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faHome, faSignIn, faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../config/firebase";
 
 const SideBarMain = ({ onToggle }) => {
   // const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -27,8 +29,18 @@ const SideBarMain = ({ onToggle }) => {
         </a>
         <br />
         
-        <a href="/auth" className="btn text-light">
+        <a href="/Authcomp" className="btn text-light">
           <FontAwesomeIcon icon={faSignIn}/>
+        </a>
+        <br />
+
+        <a href="/AuthLogIn" className="btn text-light">
+          <FontAwesomeIcon icon={faSignIn}/>
+        </a>
+        <br />
+        
+        <a className="btn text-light" onClick={()=>signOut(auth)}>
+          <FontAwesomeIcon icon={faSignOut}/>
         </a>
         <br />
       </div>
