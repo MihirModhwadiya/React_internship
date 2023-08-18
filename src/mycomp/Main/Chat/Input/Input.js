@@ -3,7 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useState } from "react";
 import { ChatContext } from "../ChatContext/ChatContext";
 import { AuthContext } from "../../../Auth/AuthContext/AuthContext";
-import { Timestamp, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import {
+  Timestamp,
+  arrayUnion,
+  doc,
+  serverTimestamp,
+  updateDoc,
+} from "firebase/firestore";
 import { v4 as uuid } from "uuid";
 import { auth, db, storage } from "../../../../config/firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
@@ -61,6 +67,23 @@ const Input = () => {
         }),
       });
     }
+
+    await updateDoc(doc(db, "userChats", isAuth.uid), {
+      [data.chatId + ".lastMessage"]: {
+        text,
+      },
+      [data.chatId + ".date"]: serverTimestamp(),
+    });
+
+    await updateDoc(doc(db, "userChats", data.user.uid), {
+      [data.chatId + ".lastMessage"]: {
+        text,
+      },
+      [data.chatId + ".date"]: serverTimestamp(),
+    });
+
+    setText("");
+    setText(null);
   };
 
   return (

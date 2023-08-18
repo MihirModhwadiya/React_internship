@@ -8,14 +8,13 @@ import Input from "./Input/Input";
 const Chat = ({ sidebarOpen }) => {
   const { isAuth } = useContext(AuthContext);
 
-
   return (
     <>
       <div className={`chat-block d-flex`}>
-        <div className="chat-body d-column-flex">
-          <div className="d-flex justify-content-start py-3"><Messages/></div>
-          {/* <div className="d-flex justify-content-end py-3">hi</div>
-          <div className="d-flex justify-content-start py-3">hi</div>
+        <div className="chat-body">
+          <Messages/>
+          {/* <div className="d-flex justify-content-end py-3">hi</div> */}
+          {/* <div className="d-flex justify-content-start py-3">hi</div>
           <div className="d-flex justify-content-end py-3">hi</div>
           <div className="d-flex justify-content-start py-3">hi</div> */}
           

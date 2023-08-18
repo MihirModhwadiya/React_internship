@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { ChatContext } from '../ChatContext/ChatContext';
-import { doc, onSnapshot } from 'firebase/firestore';
-import Message from './Message';
-import { db } from '../../../../config/firebase';
+import React, { useContext, useEffect, useState } from "react";
+import { ChatContext } from "../ChatContext/ChatContext";
+import { doc, onSnapshot } from "firebase/firestore";
+import Message from "./Message";
+import { db } from "../../../../config/firebase";
 
 const Messages = () => {
-      
   const [messages, setMessages] = useState([]);
   const { data } = useContext(ChatContext);
 
@@ -22,11 +21,11 @@ const Messages = () => {
 
   return (
     <div>
-         {/* {messages.map((m) => {
-            <Message messages={m} key={m.id}/>
-         })} */}
+      {messages.map((m) => (
+        <Message message={m} key={m.id} />
+      ))}
     </div>
-  )
-}
+  );
+};
 
 export default Messages;
