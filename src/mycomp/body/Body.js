@@ -3,16 +3,15 @@ import "./Body.css";
 // import Header from "../Header/Header";
 import Chat from "../Main/Chat/Chat";
 import SideBar from "../Main/SideBar/SideBar";
-// import SideBarMain from "../Main/SideBarMain/SideBarMain";
+import SideBarMain from "../Main/SideBarMain/SideBarMain";
 import { motion } from "framer-motion";
 
-function Body({ sidebarOpen }) {
-  // const [sidebarOpen, setSidebarOpen] = useState(true);
+function Body() {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  // const handleSidebarToggle = (newSidebarOpen) => {
-  //   setSidebarOpen(newSidebarOpen);
-  //   onToggle(!sidebarOpen);
-  // };
+  const handleSidebarToggle = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
   const variants = {
     open: { opacity: 1, x: 0 },
@@ -23,7 +22,7 @@ function Body({ sidebarOpen }) {
 
   return (
     <body className="d-flex">
-      {/* <SideBarMain onToggle={handleSidebarToggle} /> */}
+      <SideBarMain onToggle={handleSidebarToggle} />
       <motion.div
         variants={variants}
         initial="closed"

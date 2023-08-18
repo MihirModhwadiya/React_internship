@@ -14,18 +14,12 @@ import { AuthContext } from "./mycomp/Auth/AuthContext/AuthContext";
 import AuthContextProvider from "./mycomp/Auth/AuthContext/AuthContext";
 
 function App() {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  // const [sidebarOpen, setSidebarOpen] = useState(true);
 
-  const handleSidebarToggle = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+  // const handleSidebarToggle = () => {
+  //   setSidebarOpen(!sidebarOpen);
+  // };
 
-  const variants = {
-    open: { opacity: 1, x: 0 },
-    closed: { opacity: 1, x: "-100%" },
-  };
-
-  const transition = { damping: 0, duration: 0.1 };
   const { isAuth } = useContext(AuthContext);
 
   const ProtectedRoute = ({ children }) => {
@@ -39,7 +33,7 @@ function App() {
     <>
       <Main>
         <div className="d-flex">
-          <SideBarMain onToggle={handleSidebarToggle} />
+          {/* <SideBarMain onToggle={handleSidebarToggle} /> */}
 
           <Routes>
             {/* <Route path="/"> */}
@@ -50,7 +44,7 @@ function App() {
               element={
                 //make given code loads only one time it is loading 2 timesl
                 <ProtectedRoute>
-                  <Body sidebarOpen={sidebarOpen} />
+                  <Body/>
                 </ProtectedRoute>
               }
             />
@@ -61,7 +55,7 @@ function App() {
               path="/Body"
               element={
                 <ProtectedRoute>
-                  <Body sidebarOpen={sidebarOpen} />
+                  <Body/>
                 </ProtectedRoute>
               }
             />
