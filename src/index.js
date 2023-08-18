@@ -6,14 +6,17 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 // import AuthContext from "./mycomp/Auth/AuthContext/AuthContext";
-import {AuthContextProvider} from "./mycomp/Auth/AuthContext/AuthContext";
+import { AuthContextProvider } from "./mycomp/Auth/AuthContext/AuthContext";
+import { ChatContextProvider } from "./mycomp/Main/Chat/ChatContext/ChatContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <AuthContextProvider>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <ChatContextProvider>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </ChatContextProvider>
   </AuthContextProvider>
 );
 

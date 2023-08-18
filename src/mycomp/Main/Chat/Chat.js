@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Chat.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-
+import { AuthContext } from "../../Auth/AuthContext/AuthContext";
+import Messages from "./Message/Messages";
+import Input from "./Input/Input";
 const Chat = ({ sidebarOpen }) => {
+  const { isAuth } = useContext(AuthContext);
+
+
   return (
     <>
       <div className={`chat-block d-flex`}>
         <div className="chat-body d-column-flex">
+          <div className="d-flex justify-content-start py-3"><Messages/></div>
+          {/* <div className="d-flex justify-content-end py-3">hi</div>
           <div className="d-flex justify-content-start py-3">hi</div>
           <div className="d-flex justify-content-end py-3">hi</div>
-          <div className="d-flex justify-content-start py-3">hi</div>
-          <div className="d-flex justify-content-end py-3">hi</div>
-          <div className="d-flex justify-content-start py-3">hi</div>
+          <div className="d-flex justify-content-start py-3">hi</div> */}
+          
         </div>
       </div>
       <div
@@ -20,14 +26,7 @@ const Chat = ({ sidebarOpen }) => {
           sidebarOpen ? "sidebar-open" : "sidebar-close"
         }`}
       >
-        <input
-          type="text"
-          placeholder="Message"
-          className="form-control shadow-none width-control left-0 rounded-end-0"
-        />
-        <button className="btn btn-light">
-          <FontAwesomeIcon icon={faPaperPlane} />
-        </button>
+        <Input/>
       </div>
     </>
   );

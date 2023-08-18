@@ -1,10 +1,13 @@
 import "./SideBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   collection,
+  doc,
+  getDoc,
   getDocs,
+  onSnapshot,
   query,
   serverTimestamp,
   setDoc,
@@ -13,11 +16,13 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../config/firebase";
 import { AuthContext } from "../../Auth/AuthContext/AuthContext";
+import { ChatContext } from "../Chat/ChatContext/ChatContext";
 
 const SideBar = () => {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const { isAuth } = useContext(AuthContext);
+  const { dispatch } = useContext(ChatContext);
 
   const handleSearch = async () => {
     const q = query(
@@ -25,39 +30,71 @@ const SideBar = () => {
       where("displayName", "==", username)
     );
     try {
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        setUser(doc.data());
-      });
-    } catch (error) {
-      alert(error.message);
-    }
-  };
-  const handleKey = (e) => {
-    e.code === "Enter" && handleSearch();
-  };
-  const handleSelect = async () => {
-    const combinedId =
-      isAuth.uid > user.uid ? isAuth.uid + user.uid : user.uid + isAuth.uid;
-    try {
-      const res = await getDocs(db, "chats", combinedId);
-
-      if (!res.exists()) {
-        await setDoc(doc(db, "chats", combinedId), { message: [] });
-
-        await updateDoc(doc(db, "users", isAuth.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: user.uid,
-            displayName: user.displayName,
-            photoURL: user.photoURL,
-          },
-          [combinedId + []]: serverTimestamp(),
+      if (username == "" || username == null || username == undefined) {
+        setUser(null);
+      } else {
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach((doc) => {
+          setUser(doc.data());
         });
       }
     } catch (error) {
       alert(error.message);
     }
   };
+  const handleKey = () => {
+    handleSearch();
+  };
+
+  const handleSelect = async () => {
+    const combinedId =
+      isAuth.uid > user.uid ? isAuth.uid + user.uid : user.uid + isAuth.uid;
+    try {
+      const res = await getDoc(doc(db, "chats", combinedId));
+
+      if (!res.exists()) {
+        await setDoc(doc(db, "chats", combinedId), { message: [] });
+
+        await updateDoc(doc(db, "userChats", isAuth.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: user.uid,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+          },
+          [combinedId + [".date"]]: serverTimestamp(),
+        });
+
+        await updateDoc(doc(db, "userChats", user.uid), {
+          [combinedId + ".userInfo"]: {
+            uid: isAuth.uid,
+            displayName: isAuth.displayName,
+            photoURL: isAuth.photoURL,
+          },
+          [combinedId + [".date"]]: serverTimestamp(),
+        });
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+  const [chats, setChats] = useState([]);
+
+  useEffect(() => {
+    const getChats = () => {
+      const unsub = onSnapshot(doc(db, "userChats", isAuth.uid), (doc) => {
+        setChats(doc.data());
+      });
+      return () => {
+        unsub();
+      };
+    };
+    isAuth.uid && getChats();
+  }, [isAuth.uid]);
+
+  const handleSelectforchat = (u) => {
+    dispatch({ type: "CHANGE_USER", payload: u });
+  };
+
 
   return (
     <div className="mt-3 position-relative">
@@ -66,10 +103,9 @@ const SideBar = () => {
           className="form-control shadow-none rounded-end-0"
           type="text"
           placeholder="Search"
-          onKeyDown={handleKey}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <button className="btn btn-light">
+        <button onClick={handleKey} className="btn btn-light">
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </div>
@@ -83,6 +119,23 @@ const SideBar = () => {
             <div className="px-3">{user.displayName}</div>
           </div>
         )}
+      </ul>
+      <ul className="list-group p-1 chats">
+        {
+          // setTimeout(() => {
+          Object.entries(chats).map((chat) => (
+            <div
+              className="userChat btn rounded-0 border-1 list-group-item bg-transparent text-light d-flex"
+              key={chat[0]}
+              onClick={() => handleSelectforchat(chat[1].userInfo)} // --------------------
+            >
+              <img src={chat[1].userInfo.photoURL} width="30px" alt="" />
+              <div className="userChatInfo">
+                <div className="px-3">{chat[1].userInfo.displayName}</div>
+              </div>
+            </div>
+          ))
+        }
       </ul>
     </div>
   );
