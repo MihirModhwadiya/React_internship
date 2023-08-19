@@ -1,12 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./Chat.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../../Auth/AuthContext/AuthContext";
 import Messages from "./Message/Messages";
 import Input from "./Input/Input";
 const Chat = ({ sidebarOpen }) => {
-  const { isAuth } = useContext(AuthContext);
 
   return (
     <>

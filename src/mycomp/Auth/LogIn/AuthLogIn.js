@@ -4,8 +4,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 const Authcomp = () => {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const signIn = async (e) => {
@@ -31,7 +29,6 @@ const Authcomp = () => {
           alert("Check your internet connection.");
           break;
       }
-      // alert(error.message);
     }
   };
 

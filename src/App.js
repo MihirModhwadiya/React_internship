@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./App.css";
+import React, { useContext } from "react";
 import Authcomp from "./mycomp/Auth/Authcomp";
 import AuthLogIn from "./mycomp/Auth/LogIn/AuthLogIn";
 import Body from "./mycomp/body/Body";
@@ -9,16 +8,9 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import SideBarMain from "./mycomp/Main/SideBarMain/SideBarMain";
 import { AuthContext } from "./mycomp/Auth/AuthContext/AuthContext";
-import AuthContextProvider from "./mycomp/Auth/AuthContext/AuthContext";
 
 function App() {
-  // const [sidebarOpen, setSidebarOpen] = useState(true);
-
-  // const handleSidebarToggle = () => {
-  //   setSidebarOpen(!sidebarOpen);
-  // };
 
   const { isAuth } = useContext(AuthContext);
 
@@ -33,15 +25,12 @@ function App() {
     <>
       <Main>
         <div className="d-flex">
-          {/* <SideBarMain onToggle={handleSidebarToggle} /> */}
 
           <Routes>
-            {/* <Route path="/"> */}
             <Route
               exact
               path="/"
               element={
-                //make given code loads only one time it is loading 2 timesl
                 <ProtectedRoute>
                   <Body />
                 </ProtectedRoute>
@@ -58,7 +47,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* </Route> */}
           </Routes>
         </div>
       </Main>

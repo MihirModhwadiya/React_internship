@@ -1,5 +1,3 @@
-// solve error in this code
-
 import "./Authcomp.css";
 import { auth, storage, db } from "../../config/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -15,10 +13,6 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Authcomp = () => {
-  // const [displayName, setdisplayName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [photoURL, setphotoURL] = useState("");
-  // const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const signUp = async (e) => {

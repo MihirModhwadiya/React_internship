@@ -11,7 +11,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
-import { auth, db, storage } from "../../../../config/firebase";
+import { db, storage } from "../../../../config/firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 const Input = () => {
   const [text, setText] = useState("");
@@ -92,7 +92,6 @@ const Input = () => {
         <input
           type="file"
           placeholder="Message"
-          // className="form-control shadow-none width-control left-0 rounded-end-0"
           id="file"
           style={{ display: "none" }}
           onChange={(e) => setImg(e.target.files[0])}

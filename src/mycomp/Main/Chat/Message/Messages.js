@@ -19,12 +19,9 @@ const Messages = () => {
     };
   }, [data.chatId]);
 
-  // console.log(messages);
-
   return (
     <div>
       {messages && messages.map((m) => (
-      // {messages==undefined ? alert("message is undefined") : messages.map((m) => (
         <Message message={m} key={m.id} />
       ))}
     </div>
