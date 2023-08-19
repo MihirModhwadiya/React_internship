@@ -7,17 +7,16 @@ import reportWebVitals from "./reportWebVitals";
 import { AuthContextProvider } from "./mycomp/Auth/AuthContext/AuthContext";
 import { ChatContextProvider } from "./mycomp/Main/Chat/ChatContext/ChatContext";
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
   <AuthContextProvider>
     <ChatContextProvider>
       <React.StrictMode>
         <App />
       </React.StrictMode>
     </ChatContextProvider>
-  </AuthContextProvider>,
-  document.getElementById("root")
+  </AuthContextProvider>
 );
-reportWebVitals();
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
