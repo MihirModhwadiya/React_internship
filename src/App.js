@@ -11,7 +11,6 @@ import {
 import { AuthContext } from "./mycomp/Auth/AuthContext/AuthContext";
 
 function App() {
-
   const { isAuth } = useContext(AuthContext);
 
   const ProtectedRoute = ({ children }) => {
@@ -25,17 +24,16 @@ function App() {
     <>
       <Main>
         <div className="d-flex">
-
           <Routes>
-            <Route
-              exact
+            {/* <Route
+              index
               path="/"
               element={
                 <ProtectedRoute>
                   <Body />
                 </ProtectedRoute>
               }
-            />
+            /> */}
             <Route exact path="/Authcomp" element={<Authcomp />} />
             <Route exact path="/AuthLogIn" element={<AuthLogIn />} />
             <Route
