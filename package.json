@@ -1,6 +1,6 @@
 {
   "name": "internship-project",
-  "homepage": "https://MihirModhwadiya.github.io/React_internship/index.html",
+  "homepage": "https://MihirModhwadiya.github.io/React_internship",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "gh-pages": "^6.0.0"
   }
 }

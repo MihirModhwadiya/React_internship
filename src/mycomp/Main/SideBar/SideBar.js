@@ -30,7 +30,7 @@ const SideBar = () => {
       where("displayName", "==", username)
     );
     try {
-      if (username == "" || username == null || username == undefined) {
+      if (username === "" || username === null || username === undefined) {
         setUser(null);
       } else {
         const querySnapshot = await getDocs(q);
