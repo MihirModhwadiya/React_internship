@@ -38,13 +38,12 @@ function App() {
           <Routes>
             {/* <Route path="/"> */}
             <Route
-              // exact
-              index
-              // path="/Body"
+              exact
+              path="/"
               element={
                 //make given code loads only one time it is loading 2 timesl
                 <ProtectedRoute>
-                  <Body/>
+                  <Body />
                 </ProtectedRoute>
               }
             />
@@ -55,7 +54,7 @@ function App() {
               path="/Body"
               element={
                 <ProtectedRoute>
-                  <Body/>
+                  <Body />
                 </ProtectedRoute>
               }
             />
