@@ -1,7 +1,7 @@
 import "./AuthLogIn.css";
 import { auth } from "../../../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Authcomp = () => {
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ const Authcomp = () => {
           <div className="text-center d-flex justify-content-center">
             <p>
               create account?
-              <a href="/Authcomp">Sign Up</a>
+              <Link to="/Authcomp">Sign Up</Link>
             </p>
           </div>
         </form>

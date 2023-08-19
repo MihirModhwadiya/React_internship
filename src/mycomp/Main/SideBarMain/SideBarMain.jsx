@@ -10,6 +10,7 @@ import {
 import { signOut } from "firebase/auth";
 import { auth } from "../../../config/firebase";
 import { AuthContext } from "../../Auth/AuthContext/AuthContext";
+import { Link } from "react-router-dom";
 
 const SideBarMain = ({ onToggle }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -35,9 +36,9 @@ const SideBarMain = ({ onToggle }) => {
             </button>
             <br />
 
-            <a href="/Body" className="btn text-light">
+            <Link to="/Body" className="btn text-light">
               <FontAwesomeIcon icon={faHome} />
-            </a>
+            </Link>
             <br />
           </seaction>
         ) : null}

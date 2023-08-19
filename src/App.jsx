@@ -2,12 +2,7 @@ import React, { useContext } from "react";
 import Authcomp from "./mycomp/Auth/Authcomp";
 import AuthLogIn from "./mycomp/Auth/LogIn/AuthLogIn";
 import Body from "./mycomp/body/Body";
-import {
-  BrowserRouter as Main,
-  Navigate,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./mycomp/Auth/AuthContext/AuthContext";
 
 function App() {
@@ -22,11 +17,11 @@ function App() {
 
   return (
     <>
-      <Main>
+      <HashRouter>
         <div className="d-flex">
           <Routes>
             <Route
-              index
+              
               element={
                 <ProtectedRoute>
                   <Body />
@@ -46,7 +41,7 @@ function App() {
             />
           </Routes>
         </div>
-      </Main>
+      </HashRouter>
     </>
   );
 }

@@ -135,7 +135,6 @@ const SideBar = () => {
               <div className="userChatInfo">
                 <div className="px-3">{chat[1].userInfo.displayName}</div>
               </div>
-                <p>{chat[1].lastMessage?.text}</p>
             </div>
           ))
         }

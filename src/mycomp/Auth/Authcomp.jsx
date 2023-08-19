@@ -10,7 +10,7 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Authcomp = () => {
   const navigate = useNavigate();
@@ -43,14 +43,14 @@ const Authcomp = () => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log("Upload is " + progress + "% done");
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
-          }
+          // switch (snapshot.state) {
+          //   case "paused":
+          //     console.log("Upload is paused");
+          //     break;
+          //   case "running":
+          //     console.log("Upload is running");
+          //     break;
+          // }
         },
         (error) => {
           alert("first error" + error.message);
@@ -127,7 +127,7 @@ const Authcomp = () => {
           <div className="text-center d-flex justify-content-center">
             <p>
               create account?
-              <a href="/AuthLogIn">Sign In</a>
+              <Link to="/AuthLogIn">Sign In</Link>
             </p>
           </div>
         </form>

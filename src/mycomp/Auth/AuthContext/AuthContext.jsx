@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ children }) => {
     });
     return () => {
       unsub();
-    };
+    }; 
   }, []);
 
   return (
