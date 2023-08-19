@@ -25,15 +25,14 @@ function App() {
       <Main>
         <div className="d-flex">
           <Routes>
-            {/* <Route
+            <Route
               index
-              path="/"
               element={
                 <ProtectedRoute>
                   <Body />
                 </ProtectedRoute>
               }
-            /> */}
+            />
             <Route exact path="/Authcomp" element={<Authcomp />} />
             <Route exact path="/AuthLogIn" element={<AuthLogIn />} />
             <Route
