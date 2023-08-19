@@ -41,6 +41,7 @@ const SideBar = () => {
     } catch (error) {
       alert(error.message);
     }
+    setUsername("")
   };
   const handleKey = () => {
     handleSearch();
@@ -95,10 +96,13 @@ const SideBar = () => {
     dispatch({ type: "CHANGE_USER", payload: u });
   };
 
+  console.log(chats);
+
   return (
     <div className="mt-3 position-relative">
       <div className="btn-group d-flex justify-content-center p-3">
         <input
+        value={username ? username : ""}
           className="form-control shadow-none rounded-end-0"
           type="text"
           placeholder="Search"
@@ -121,7 +125,6 @@ const SideBar = () => {
       </ul>
       <ul className="list-group p-1 chats">
         {
-          // setTimeout(() => {
           chats && Object.entries(chats)?.sort((a,b)=>a[1].date - b[1].date).map((chat) => (
             <div
               className="userChat btn rounded-0 border-1 list-group-item bg-transparent text-light d-flex"

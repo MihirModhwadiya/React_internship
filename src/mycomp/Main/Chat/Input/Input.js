@@ -82,8 +82,8 @@ const Input = () => {
       [data.chatId + ".date"]: serverTimestamp(),
     });
 
-    setText("");
     setText(null);
+    setImg(null);
   };
 
   return (
@@ -104,6 +104,7 @@ const Input = () => {
       </div>
 
       <input
+        value={text==null?"":text}
         type="text"
         placeholder="Message"
         className="form-control shadow-none width-control left-0 rounded-end-0"

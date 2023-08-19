@@ -8,6 +8,8 @@ const Messages = () => {
   const [messages, setMessages] = useState([]);
   const { data } = useContext(ChatContext);
 
+  console.log(messages);
+
   useEffect(() => {
     const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
       doc.exists() && setMessages(doc.data().messages);
@@ -17,11 +19,12 @@ const Messages = () => {
     };
   }, [data.chatId]);
 
-  console.log(messages);
+  // console.log(messages);
 
   return (
     <div>
-      {messages.map((m) => (
+      {messages && messages.map((m) => (
+      // {messages==undefined ? alert("message is undefined") : messages.map((m) => (
         <Message message={m} key={m.id} />
       ))}
     </div>

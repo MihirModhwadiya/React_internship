@@ -6,6 +6,16 @@
 .chat-body {
   flex: 1;
   overflow-y: auto;
+  margin-bottom: 70px;
+}
+.chat-body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.chat-body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .sidebar-open {

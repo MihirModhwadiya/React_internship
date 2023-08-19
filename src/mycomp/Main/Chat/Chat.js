@@ -13,11 +13,6 @@ const Chat = ({ sidebarOpen }) => {
       <div className={`chat-block d-flex`}>
         <div className="chat-body">
           <Messages/>
-          {/* <div className="d-flex justify-content-end py-3">hi</div> */}
-          {/* <div className="d-flex justify-content-start py-3">hi</div>
-          <div className="d-flex justify-content-end py-3">hi</div>
-          <div className="d-flex justify-content-start py-3">hi</div> */}
-          
         </div>
       </div>
       <div
