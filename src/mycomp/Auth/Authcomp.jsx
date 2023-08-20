@@ -21,6 +21,14 @@ const Authcomp = () => {
     const email = e.target[1].value;
     const photoURL = e.target[2].files[0];
     const password = e.target[3].value;
+    const conpassword = e.target[4].value;
+
+    if (password !== conpassword) {
+      alert("Plese Enter same password");
+      e.target[4].focus();
+      return;
+    }
+
     try {
       const q = query(
         collection(db, "users"),
@@ -98,26 +106,39 @@ const Authcomp = () => {
   return (
     <div className="d-flex">
       <div className="widthh position-absolute top-50 start-50 translate-middle">
-        <form onSubmit={signUp} className="padd container border border-dark shadow-lg">
+        <form
+          onSubmit={signUp}
+          className="padd container border border-dark shadow-lg"
+        >
           <input
+            required
             className="form-control my-3 shadow-none"
             type="text"
             pattern="[A-Za-z0-9]+"
-            placeholder="displayName"
+            placeholder="Username"
           />
           <input
+            required
             className="form-control my-3 shadow-none"
             type="email"
             placeholder="Email"
           />
           <input
+            required
             className="form-control my-3 shadow-none"
             type="file"
           />
           <input
+            required
             className="form-control my-3 shadow-none"
             type="password"
             placeholder="Password"
+          />
+          <input
+            required
+            className="form-control my-3 shadow-none"
+            type="password"
+            placeholder="Confirm Password"
           />
           <div className="text-center d-flex justify-content-center">
             <button type="submit" className="btn btn-primary">

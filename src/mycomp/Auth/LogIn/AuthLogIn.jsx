@@ -40,12 +40,14 @@ const Authcomp = () => {
           className="padd container border border-dark shadow-lg p-5"
         >
           <input
+            required
             className="form-control my-3 shadow-none"
             type="email"
             placeholder="Email"
           />
 
           <input
+            required
             className="form-control my-3 shadow-none"
             type="password"
             placeholder="Password"
