@@ -21,7 +21,8 @@ function App() {
         <div className="d-flex">
           <Routes>
             <Route
-              
+              exact
+              path="/"
               element={
                 <ProtectedRoute>
                   <Body />

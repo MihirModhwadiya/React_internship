@@ -34,10 +34,10 @@ const Authcomp = () => {
 
   return (
     <div className="d-flex">
-      <div className="position-absolute top-50 start-50 translate-middle">
+      <div className="widthh position-absolute top-50 start-50 translate-middle">
         <form
           onSubmit={signIn}
-          className="container border border-dark shadow-lg p-5"
+          className="padd container border border-dark shadow-lg p-5"
         >
           <input
             className="form-control my-3 shadow-none"
