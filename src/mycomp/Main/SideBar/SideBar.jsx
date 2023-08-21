@@ -124,8 +124,8 @@ const SideBar = ({ h_u_Select }) => {
   }, [username]);
 
   return (
-    <div className="mt-3 position-absolute top-0 start-0">
-      <div className="btn-group d-flex justify-content-center p-3">
+    <div className="mt-3 position-absolute top-0 start-0 mt-5">
+      <div className="btn-group d-flex justify-content-center mt-3 p-3">
         <input
           className="form-control shadow-none rounded-end-0"
           type="text"

@@ -24,7 +24,7 @@ const Message = ({ message }) => {
         {message.img && (
           <img
             src={message === undefined ? null : message.img}
-            width="300px"
+            width="200px"
             alt=""
           />
         )}

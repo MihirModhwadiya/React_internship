@@ -31,7 +31,7 @@ function Body() {
         className={`navbar bg-dark d-flex position-fixed end-0 top-0 justify-content-end ${
           sidebarOpen ? "ch-body-open ch-body-open-nv" : "ch-body-close-nv"
         }`}
-        style={{ zIndex: 1000 }}
+        style={{ zIndex: 10 }}
       >
         <Header />
       </nav>
@@ -45,7 +45,7 @@ function Body() {
           className={`collapse sidebar bg-dark ${sidebarOpen ? "show" : ""}`}
           id="collapseExample"
         >
-          <div>
+          <div style={{ zIndex: 9 }}>
             <SideBar h_u_Select={handleUserSelect} />
           </div>
         </motion.div>
