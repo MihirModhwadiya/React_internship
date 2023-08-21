@@ -9,6 +9,12 @@ body {
   overflow: hidden;
   background-color: rgb(141, 141, 141);
 }
+.body {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: rgb(141, 141, 141);
+}
 
 .main {
   flex: 1;

@@ -103,15 +103,17 @@ const Input = () => {
       </div>
 
       <input
-        value={text==null?"":text}
+        value={text == null ? "" : text}
         type="text"
         placeholder="Message"
         className="form-control shadow-none width-control left-0 rounded-end-0"
         onChange={(e) => setText(e.target.value)}
       />
-      <button onClick={handleSend} className="btn btn-light">
-        <FontAwesomeIcon icon={faPaperPlane} />
-      </button>
+      {text === null || text[0] === " " || text === "" ? null : (
+        <button onClick={handleSend} className="btn btn-light">
+          <FontAwesomeIcon icon={faPaperPlane} />
+        </button>
+      )}
     </>
   );
 };

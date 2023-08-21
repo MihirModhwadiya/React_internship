@@ -20,7 +20,7 @@ function Body() {
   const transition = { damping: 0, duration: 0.1 };
 
   return (
-    <body className="d-flex">
+    <div className="d-flex body">
       <SideBarMain onToggle={handleSidebarToggle} />
       <motion.div
         variants={variants}
@@ -44,7 +44,7 @@ function Body() {
           <Chat sidebarOpen={sidebarOpen} />
         </div>
       </main>
-    </body>
+    </div>
   );
 }
 

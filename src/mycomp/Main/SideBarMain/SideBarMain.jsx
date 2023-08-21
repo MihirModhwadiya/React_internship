@@ -23,10 +23,10 @@ const SideBarMain = ({ onToggle }) => {
   const { isAuth } = useContext(AuthContext);
 
   return (
-    <div className="bg-primary">
+    <div id="hh" className="bg-primary">
       <div className="text-light" style={{ height: "700vh" }}>
         {isAuth ? (
-          <seaction>
+          <div>
             <button
               className="navbar-toggler p-3"
               type="button"
@@ -40,7 +40,7 @@ const SideBarMain = ({ onToggle }) => {
               <FontAwesomeIcon icon={faHome} />
             </Link>
             <br />
-          </seaction>
+          </div>
         ) : null}
 
         {isAuth ? null : (

@@ -99,7 +99,7 @@ const SideBar = () => {
   console.log(chats);
 
   return (
-    <div className="mt-3 position-relative">
+    <div className="mt-3 position-absolute top-0 start-0">
       <div className="btn-group d-flex justify-content-center p-3">
         <input
         value={username ? username : ""}
@@ -125,7 +125,7 @@ const SideBar = () => {
       </ul>
       <ul className="list-group p-1 chats">
         {
-          chats && Object.entries(chats)?.sort((a,b)=>a[1].date - b[1].date).map((chat) => (
+          chats && Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
             <div
               className="userChat btn rounded-0 border-1 list-group-item bg-transparent text-light d-flex"
               key={chat[0]}
