@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faPhone, faVideoCamera } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faVideoCamera } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../Auth/AuthContext/AuthContext";
 
 const Header = () => {
