@@ -18,19 +18,19 @@ import { db } from "../../../config/firebase";
 import { AuthContext } from "../../Auth/AuthContext/AuthContext";
 import { ChatContext } from "../Chat/ChatContext/ChatContext";
 
-const SideBar = () => {
+const SideBar = ({ h_u_Select }) => {
   const [username, setUsername] = useState("");
   const [users, setUsers] = useState(null);
   const { isAuth } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
+  const [userSelect, setUserSelect] = useState(false);
 
   const handleSearch = async () => {
     let charr = username.replace(
       username.charAt(username.length - 1),
       String.fromCharCode(username.charCodeAt(username.length - 1) + 1)
     );
-    // console.log(charr);
-    console.log(charr);
+
     const q = query(
       collection(db, "users"),
       // where("displayName", "==", username)
@@ -114,6 +114,8 @@ const SideBar = () => {
   }, [isAuth.uid]);
 
   const handleSelectforchat = (u) => {
+    setUserSelect(true);
+    h_u_Select();
     dispatch({ type: "CHANGE_USER", payload: u });
   };
 
@@ -152,7 +154,7 @@ const SideBar = () => {
               onClick={() => handleSelect(user)}
               className="btn rounded-0 border-1 list-group-item bg-transparent text-light d-flex"
             >
-              <img src={user.photoURL} width="30px" alt="" />
+              <img src={user.photoURL} height="30px" width="30px" alt="" />
               <div className="px-3">{user.displayName}</div>
             </div>
           ))}
@@ -169,7 +171,12 @@ const SideBar = () => {
                 key={chat[0]}
                 onClick={() => handleSelectforchat(chat[1].userInfo)} // --------------------
               >
-                <img src={chat[1].userInfo.photoURL} width="30px" alt="" />
+                <img
+                  src={chat[1].userInfo.photoURL}
+                  height="30px"
+                  width="30px"
+                  alt=""
+                />
                 <div className="userChatInfo">
                   <div className="px-3">{chat[1].userInfo.displayName}</div>
                 </div>

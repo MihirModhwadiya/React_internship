@@ -8,9 +8,14 @@ import { motion } from "framer-motion";
 
 function Body() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [userSelect, setUserSelect] = useState(false);
 
   const handleSidebarToggle = () => {
     setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleUserSelect = () => {
+    setUserSelect(true);
   };
 
   const variants = {
@@ -26,6 +31,7 @@ function Body() {
         className={`navbar bg-dark d-flex position-fixed end-0 top-0 justify-content-end ${
           sidebarOpen ? "ch-body-open ch-body-open-nv" : "ch-body-close-nv"
         }`}
+        style={{ zIndex: 1000 }}
       >
         <Header />
       </nav>
@@ -40,7 +46,7 @@ function Body() {
           id="collapseExample"
         >
           <div>
-            <SideBar />
+            <SideBar h_u_Select={handleUserSelect} />
           </div>
         </motion.div>
 
@@ -50,7 +56,8 @@ function Body() {
           }`}
         >
           <div className={`chat w-100`}>
-            <Chat sidebarOpen={sidebarOpen} />
+            {userSelect == true ? <Chat sidebarOpen={sidebarOpen} /> : null}
+            {/* <Chat sidebarOpen={sidebarOpen} /> */}
           </div>
         </main>
       </div>

@@ -19,7 +19,7 @@ const Header = () => {
       {isAuth ? (
         <div className="border-1 d-flex ps-3">
           <div className="bg-light d-flex align-items-center">
-            <img src={isAuth.photoURL} width="60px" className="" alt="" />
+            <img src={isAuth.photoURL} height="40px" width="60px" className="" alt="" />
           </div>
           <div className="d-flex align-items-center ps-3">
             <h5 className="text-light">{isAuth.displayName}</h5>
