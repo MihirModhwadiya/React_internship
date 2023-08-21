@@ -3,6 +3,7 @@ import "./Body.css";
 import Chat from "../Main/Chat/Chat";
 import SideBar from "../Main/SideBar/SideBar";
 import SideBarMain from "../Main/SideBarMain/SideBarMain";
+import Header from "../Header/Header";
 import { motion } from "framer-motion";
 
 function Body() {
@@ -20,31 +21,40 @@ function Body() {
   const transition = { damping: 0, duration: 0.1 };
 
   return (
-    <div className="d-flex body">
-      <SideBarMain onToggle={handleSidebarToggle} />
-      <motion.div
-        variants={variants}
-        initial="closed"
-        animate={sidebarOpen ? "open" : "closed"}
-        transition={transition}
-        className={`collapse sidebar bg-dark ${sidebarOpen ? "show" : ""}`}
-        id="collapseExample"
-      >
-        <div>
-          <SideBar />
-        </div>
-      </motion.div>
-
-      <main
-        className={`main p-3 d-flex position-absolute end-0 justify-content-end ${
-          sidebarOpen ? "ch-body-open" : "ch-body-close"
+    <>
+      <nav
+        className={`navbar bg-dark d-flex position-fixed end-0 top-0 justify-content-end ${
+          sidebarOpen ? "ch-body-open ch-body-open-nv" : "ch-body-close-nv"
         }`}
       >
-        <div className={`chat w-100`}>
-          <Chat sidebarOpen={sidebarOpen} />
-        </div>
-      </main>
-    </div>
+        <Header />
+      </nav>
+      <div className="d-flex body">
+        <SideBarMain onToggle={handleSidebarToggle} />
+        <motion.div
+          variants={variants}
+          initial="closed"
+          animate={sidebarOpen ? "open" : "closed"}
+          transition={transition}
+          className={`collapse sidebar bg-dark ${sidebarOpen ? "show" : ""}`}
+          id="collapseExample"
+        >
+          <div>
+            <SideBar />
+          </div>
+        </motion.div>
+
+        <main
+          className={`main p-3 d-flex position-absolute end-0 justify-content-end ${
+            sidebarOpen ? "ch-body-open" : "ch-body-close"
+          }`}
+        >
+          <div className={`chat w-100`}>
+            <Chat sidebarOpen={sidebarOpen} />
+          </div>
+        </main>
+      </div>
+    </>
   );
 }
 

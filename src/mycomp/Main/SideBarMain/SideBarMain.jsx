@@ -63,12 +63,6 @@ const SideBarMain = ({ onToggle }) => {
           </button>
         ) : null}
         <br />
-        {isAuth ? (
-          <button className="btn text-light position-fixed bottom-0 mb-3">
-            <img src={isAuth.photoURL} width="30px" alt=""/>
-          </button>
-        ) : null}
-        <br />
       </div>
     </div>
   );
