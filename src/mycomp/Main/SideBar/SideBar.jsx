@@ -1,9 +1,11 @@
 import "./SideBar.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faClose, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useEffect, useState } from "react";
 import {
   collection,
+  deleteDoc,
+  deleteField,
   doc,
   getDoc,
   getDocs,
@@ -64,10 +66,13 @@ const SideBar = ({ h_u_Select }) => {
   //   handleSearch();
   // };
 
+  let global_combinedId;
+
   const handleSelect = async (user) => {
     if (user) {
       const combinedId =
         isAuth.uid > user.uid ? isAuth.uid + user.uid : user.uid + isAuth.uid;
+      global_combinedId = combinedId;
       try {
         const res = await getDoc(doc(db, "chats", combinedId));
 
@@ -123,6 +128,26 @@ const SideBar = ({ h_u_Select }) => {
     handleSearch();
   }, [username]);
 
+  const removechatlist = async (combinedId) => {
+    try {
+      await deleteDoc(doc(db, "chats", combinedId));
+
+      // Remove the chat entry from the user's chat list
+      await updateDoc(doc(db, "userChats", isAuth.uid), {
+        [combinedId]: deleteField(), // Use `deleteField()` to remove the chat entry
+      });
+
+      // Remove the chat entry from the other user's chat list
+      const otherUserId = combinedId.replace(isAuth.uid, "");
+      await updateDoc(doc(db, "userChats", otherUserId), {
+        [combinedId]: deleteField(), // Use `deleteField()` to remove the chat entry
+      });
+      window.location.reload();
+    } catch (error) {
+      alert("Error removing chat: " + error.message);
+    }
+  };
+
   return (
     <div className="mt-3 position-absolute top-0 start-0 mt-5">
       <div className="btn-group d-flex justify-content-center mt-3 p-3">
@@ -149,13 +174,18 @@ const SideBar = ({ h_u_Select }) => {
       <ul className="list-group p-1">
         {users &&
           users.map((user) => (
-            <div
-              key={user.uid}
-              onClick={() => handleSelect(user)}
-              className="btn rounded-0 border-1 list-group-item bg-transparent text-light d-flex"
-            >
-              <img src={user.photoURL} height="30px" width="30px" alt="" />
-              <div className="px-3">{user.displayName}</div>
+            <div className="rounded-0 border-1 list-group-item bg-transparent text-light d-flex justify-content-between">
+              <div className="d-flex">
+                <img src={user.photoURL} height="30px" width="30px" alt="" />
+                <div className="px-3">{user.displayName}</div>
+              </div>
+              <button
+                key={user.uid}
+                onClick={() => handleSelect(user)}
+                className="btn btn-success"
+              >
+                <FontAwesomeIcon icon={faAdd} />
+              </button>
             </div>
           ))}
       </ul>
@@ -167,18 +197,31 @@ const SideBar = ({ h_u_Select }) => {
             ?.sort((a, b) => b[1].date - a[1].date)
             .map((chat) => (
               <div
-                className="userChat btn rounded-0 border-1 list-group-item bg-transparent text-light d-flex"
+                className="userChat btn rounded-0 border-1 list-group-item bg-transparent text-light d-flex justify-content-between"
                 key={chat[0]}
                 onClick={() => handleSelectforchat(chat[1].userInfo)} // --------------------
               >
-                <img
-                  src={chat[1].userInfo.photoURL}
-                  height="30px"
-                  width="30px"
-                  alt=""
-                />
-                <div className="userChatInfo">
-                  <div className="px-3">{chat[1].userInfo.displayName}</div>
+                <div className="d-flex justify-content-start">
+                  <img
+                    src={chat[1].userInfo.photoURL}
+                    height="30px"
+                    width="30px"
+                    alt=""
+                  />
+                  <div className="userChatInfo">
+                    <div className="px-3">{chat[1].userInfo.displayName}</div>
+                  </div>
+                </div>
+                <div className="userChatInfo d-flex justify-content-end">
+                  <button
+                    className="btn btn-danger"
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent the click event from triggering the parent click event
+                      removechatlist(chat[0]); // Pass the combinedId to the function
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faClose} />
+                  </button>
                 </div>
               </div>
             ))}

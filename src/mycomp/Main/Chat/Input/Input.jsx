@@ -109,7 +109,7 @@ const Input = () => {
         className="form-control shadow-none width-control left-0 rounded-end-0"
         onChange={(e) => setText(e.target.value)}
       />
-      {text === null || text[0] === " " || text === "" ? null : (
+      {(text === null || text[0] === " " || text === "") && !img ? null : (
         <button onClick={handleSend} className="btn btn-light">
           <FontAwesomeIcon icon={faPaperPlane} />
         </button>
