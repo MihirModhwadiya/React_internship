@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 import { AuthContext } from "../../../Auth/AuthContext/AuthContext";
 
 export const ChatContext = createContext();
@@ -10,7 +10,9 @@ export const ChatContextProvider = ({ children }) => {
     user: {},
   };
 
+  const [curruser, setCurruser] = useState({});
   const chatReducer = (state, action) => {
+    setCurruser(action.payload);
     switch (action.type) {
       case "CHANGE_USER":
         return {
@@ -29,7 +31,7 @@ export const ChatContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(chatReducer, INITIAL_STATE);
 
   return (
-    <ChatContext.Provider value={{ data: state, dispatch }}>
+    <ChatContext.Provider value={{ data: state, dispatch, curruser }}>
       {children}
     </ChatContext.Provider>
   );

@@ -8,12 +8,16 @@ import { motion } from "framer-motion";
 
 function Body() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [userSelect, setUserSelect] = useState(false);
-
   const handleSidebarToggle = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
+  const [callSatus, setCallSatus] = useState(false);
+  const funCallSatus = () => {
+    setCallSatus(!callSatus);
+  };
+
+  const [userSelect, setUserSelect] = useState(false);
   const handleUserSelect = () => {
     setUserSelect(true);
   };
@@ -27,40 +31,45 @@ function Body() {
 
   return (
     <>
-      <nav
-        className={`navbar bg-dark d-flex position-fixed end-0 top-0 justify-content-end ${
-          sidebarOpen ? "ch-body-open ch-body-open-nv" : "ch-body-close-nv"
-        }`}
-        style={{ zIndex: 10 }}
-      >
-        <Header />
-      </nav>
-      <div className="d-flex body">
-        <SideBarMain onToggle={handleSidebarToggle} />
-        <motion.div
-          variants={variants}
-          initial="closed"
-          animate={sidebarOpen ? "open" : "closed"}
-          transition={transition}
-          className={`collapse sidebar bg-dark ${sidebarOpen ? "show" : ""}`}
-          id="collapseExample"
-        >
-          <div style={{ zIndex: 9 }}>
-            <SideBar h_u_Select={handleUserSelect} />
-          </div>
-        </motion.div>
-
-        <main
-          className={`main p-3 d-flex position-absolute end-0 justify-content-end ${
-            sidebarOpen ? "ch-body-open" : "ch-body-close"
+      {/* {callSatus === false ? ( */}
+        <nav
+          className={`navbar bg-dark d-flex position-fixed end-0 top-0 justify-content-end ${
+            sidebarOpen ? "ch-body-open ch-body-open-nv" : "ch-body-close-nv"
           }`}
+          style={{ zIndex: 10 }}
         >
-          <div className={`chat w-100`}>
-            {userSelect == true ? <Chat sidebarOpen={sidebarOpen} /> : null}
-            {/* <Chat sidebarOpen={sidebarOpen} /> */}
+          <Header handleCall={funCallSatus} />
+        </nav>
+          <div className="d-flex body">
+            <SideBarMain onToggle={handleSidebarToggle} />
+            <motion.div
+              variants={variants}
+              initial="closed"
+              animate={sidebarOpen ? "open" : "closed"}
+              transition={transition}
+              className={`collapse sidebar bg-dark ${
+                sidebarOpen ? "show" : ""
+              }`}
+              id="collapseExample"
+            >
+              <div style={{ zIndex: 9 }}>
+                <SideBar h_u_Select={handleUserSelect} />
+              </div>
+            </motion.div>
+
+            <main
+              className={`main p-3 d-flex position-absolute end-0 justify-content-end ${
+                sidebarOpen ? "ch-body-open" : "ch-body-close"
+              }`}
+            >
+              <div className={`chat w-100`}>
+                {userSelect === true ? (
+                  <Chat sidebarOpen={sidebarOpen} />
+                ) : null}
+                
+              </div>
+            </main>
           </div>
-        </main>
-      </div>
     </>
   );
 }
