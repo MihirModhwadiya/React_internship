@@ -1,10 +1,13 @@
-.sender{
-    display: flex;
-    justify-content: end;
-    padding: 30px;
+.sender {
+  display: flex;
+  justify-content: end;
+  padding: 30px;
 }
-.reciver{
-    display: flex;
-    justify-content: end;
-    padding: 30px;
+.reciver {
+  display: flex;
+  justify-content: end;
+  padding: 30px;
+}
+.width{
+    max-width: 40%;
 }

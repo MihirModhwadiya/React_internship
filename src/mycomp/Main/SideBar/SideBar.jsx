@@ -66,13 +66,10 @@ const SideBar = ({ h_u_Select }) => {
   //   handleSearch();
   // };
 
-  let global_combinedId;
-
   const handleSelect = async (user) => {
     if (user) {
       const combinedId =
         isAuth.uid > user.uid ? isAuth.uid + user.uid : user.uid + isAuth.uid;
-      global_combinedId = combinedId;
       try {
         const res = await getDoc(doc(db, "chats", combinedId));
 
