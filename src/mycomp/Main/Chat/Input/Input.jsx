@@ -13,7 +13,7 @@ import {
 import { v4 as uuid } from "uuid";
 import { db, storage } from "../../../../config/firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { Document, Page, pdfjs } from "react-pdf";
+import { pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
@@ -24,7 +24,7 @@ const Input = () => {
   let imgpreviewURL;
   const { isAuth } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
-  const [pdfUrl, setPdfUrl] = useState(null);
+  // const [pdfUrl, setPdfUrl] = useState(null);
 
   const handleSend = async () => {
     if (img) {
@@ -97,7 +97,7 @@ const Input = () => {
           }
         );
 
-        setPdfUrl(null);
+        // setPdfUrl(null);
         setText(null);
         setImg(null);
         pdfReader.readAsArrayBuffer(pdfBlob);
