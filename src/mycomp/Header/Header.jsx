@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faVideoCamera } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from "../Auth/AuthContext/AuthContext";
+import { ChatContext } from "../Main/Chat/ChatContext/ChatContext";
 
 const Header = ({handleCall}) => {
   const { isAuth } = useContext(AuthContext);
   const [callStatus, setCallStatus] = useState(false);
+  const { curruser } = useContext(ChatContext);
 
   const funnCallStatus = () => {
     setCallStatus(!callStatus);
@@ -25,7 +27,7 @@ const Header = ({handleCall}) => {
         <div className="border-1 d-flex ps-3">
           <div className="bg-light d-flex align-items-center">
             <img
-              src={isAuth.photoURL}
+              src={curruser.photoURL}
               height="40px"
               width="60px"
               className=""
@@ -33,7 +35,7 @@ const Header = ({handleCall}) => {
             />
           </div>
           <div className="d-flex align-items-center ps-3">
-            <h5 className="text-light">{isAuth.displayName}</h5>
+            <h5 className="text-light">{curruser.displayName}</h5>
           </div>
         </div>
       ) : null}

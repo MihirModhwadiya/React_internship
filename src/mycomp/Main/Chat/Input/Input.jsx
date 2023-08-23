@@ -188,7 +188,7 @@ const Input = () => {
         value={text == null ? "" : text}
         type="text"
         placeholder="Message"
-        className="form-control shadow-none width-control left-0 rounded-end-0"
+        className="form-control shadow-none width-control"
         onChange={(e) => setText(e.target.value)}
       />
       {(text === null || text[0] === " " || text === "") && !img ? null : (

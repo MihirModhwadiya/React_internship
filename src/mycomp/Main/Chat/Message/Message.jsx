@@ -48,12 +48,12 @@ const Message = ({ message }) => {
         )}
 
         {message.pdfPreview && (
-          // Display PDF preview
           <a href={message.pdfURL} download="testpdf.pdf"  target="_blank" rel="noopener noreferrer" className="message-pdf">
             <img
             src={message === undefined ? null : message.pdfPreview}
             width="200px"
             alt=""
+            onClick={(message.pdfURL).print}
           />
           </a>
         )}

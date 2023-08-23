@@ -62,7 +62,13 @@ const SideBarMain = ({ onToggle }) => {
             <FontAwesomeIcon icon={faSignOut} />
           </button>
         ) : null}
+        {isAuth ? (
+          <button className="btn text-light position-fixed start-0 bottom-0 mb-3">
+            <img src={isAuth.photoURL} width="30px" alt=""/>
+          </button>
+        ) : null}
         <br />
+
       </div>
     </div>
   );
