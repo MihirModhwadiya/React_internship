@@ -35,6 +35,26 @@ const Input = () => {
 
         let unique = uuid();
 
+        pdfReader.onload = async (e) => {
+          const typedArray = new Uint8Array(e.target.result);
+          const loadingTask = pdfjs.getDocument(typedArray);
+
+          loadingTask.promise.then(async (pdfDocument) => {
+            // Generate a PDF preview image (first page)
+            const pdfCanvas = document.createElement("canvas");
+            const pdfContext = pdfCanvas.getContext("2d");
+            const pdfPage = await pdfDocument.getPage(1);
+            const viewport = pdfPage.getViewport({ scale: 1 });
+            pdfCanvas.width = viewport.width;
+            pdfCanvas.height = viewport.height;
+            await pdfPage.render({ canvasContext: pdfContext, viewport })
+              .promise;
+
+            const pdfPreviewDataUrl = pdfCanvas.toDataURL("image/jpeg");
+            imgpreviewURL = pdfPreviewDataUrl;
+          });
+        };
+
         const storageRef = ref(storage, unique);
 
         const uploadTask = uploadBytesResumable(storageRef, pdfBlob);
@@ -60,43 +80,23 @@ const Input = () => {
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(async (pdfUrl) => {
               // Store the PDF URL in the state
-              setPdfUrl(pdfUrl);
-              console.log(pdfUrl);
+              // setPdfUrl(pdfUrl);
+              // console.log(pdfUrl);
+              await updateDoc(doc(db, "chats", data.chatId), {
+                messages: arrayUnion({
+                  id: unique,
+                  text,
+                  senderId: isAuth.uid,
+                  date: Timestamp.now(),
+                  pdfPreview: imgpreviewURL, // Store the PDF preview
+                  pdfURL: pdfUrl, // Store the PDF URL
+                }),
+              });
               // ... (existing code)
             });
           }
         );
 
-        pdfReader.onload = async (e) => {
-          const typedArray = new Uint8Array(e.target.result);
-          const loadingTask = pdfjs.getDocument(typedArray);
-
-          loadingTask.promise.then(async (pdfDocument) => {
-            // Generate a PDF preview image (first page)
-            const pdfCanvas = document.createElement("canvas");
-            const pdfContext = pdfCanvas.getContext("2d");
-            const pdfPage = await pdfDocument.getPage(1);
-            const viewport = pdfPage.getViewport({ scale: 1 });
-            pdfCanvas.width = viewport.width;
-            pdfCanvas.height = viewport.height;
-            await pdfPage.render({ canvasContext: pdfContext, viewport })
-              .promise;
-
-            const pdfPreviewDataUrl = pdfCanvas.toDataURL("image/jpeg");
-            imgpreviewURL = pdfPreviewDataUrl;
-
-            await updateDoc(doc(db, "chats", data.chatId), {
-              messages: arrayUnion({
-                id: unique,
-                text,
-                senderId: isAuth.uid,
-                date: Timestamp.now(),
-                pdfPreview: pdfPreviewDataUrl, // Store the PDF preview
-                pdfURL: pdfUrl, // Store the PDF URL
-              }),
-            });
-          });
-        };
         setPdfUrl(null);
         setText(null);
         setImg(null);
