@@ -13,50 +13,133 @@ import {
 import { v4 as uuid } from "uuid";
 import { db, storage } from "../../../../config/firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { Document, Page, pdfjs } from "react-pdf";
+import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
 const Input = () => {
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
-
+  let imgpreviewURL;
   const { isAuth } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
+  const [pdfUrl, setPdfUrl] = useState(null);
 
-  const handleSend = async (e) => {
+  const handleSend = async () => {
     if (img) {
-      const storageRef = ref(storage, uuid());
-      const uploadTask = uploadBytesResumable(storageRef, img);
+      if (img.type === "application/pdf") {
+        // Handle PDF file
+        const pdfBlob = new Blob([img], { type: "application/pdf" });
+        const pdfReader = new FileReader();
 
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-          // switch (snapshot.state) {
-          //   case "paused":
-          //     console.log("Upload is paused");
-          //     break;
-          //   case "running":
-          //     console.log("Upload is running");
-          //     break;
-          // }
-        },
-        (error) => {
-          alert("first error" + error.message);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+        let unique = uuid();
+
+        const storageRef = ref(storage, unique);
+
+        const uploadTask = uploadBytesResumable(storageRef, pdfBlob);
+
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+            // switch (snapshot.state) {
+            //   case "paused":
+            //     console.log("Upload is paused");
+            //     break;
+            //   case "running":
+            //     console.log("Upload is running");
+            //     break;
+            // }
+          },
+          (error) => {
+            alert("first error" + error.message);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(async (pdfUrl) => {
+              // Store the PDF URL in the state
+              setPdfUrl(pdfUrl);
+              console.log(pdfUrl);
+              // ... (existing code)
+            });
+          }
+        );
+
+        pdfReader.onload = async (e) => {
+          const typedArray = new Uint8Array(e.target.result);
+          const loadingTask = pdfjs.getDocument(typedArray);
+
+          loadingTask.promise.then(async (pdfDocument) => {
+            // Generate a PDF preview image (first page)
+            const pdfCanvas = document.createElement("canvas");
+            const pdfContext = pdfCanvas.getContext("2d");
+            const pdfPage = await pdfDocument.getPage(1);
+            const viewport = pdfPage.getViewport({ scale: 1 });
+            pdfCanvas.width = viewport.width;
+            pdfCanvas.height = viewport.height;
+            await pdfPage.render({ canvasContext: pdfContext, viewport })
+              .promise;
+
+            const pdfPreviewDataUrl = pdfCanvas.toDataURL("image/jpeg");
+            imgpreviewURL = pdfPreviewDataUrl;
+
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
-                id: uuid(),
+                id: unique,
                 text,
                 senderId: isAuth.uid,
                 date: Timestamp.now(),
-                img: downloadURL,
+                pdfPreview: pdfPreviewDataUrl, // Store the PDF preview
+                pdfURL: pdfUrl, // Store the PDF URL
               }),
             });
           });
-        }
-      );
+        };
+        setPdfUrl(null);
+        setText(null);
+        setImg(null);
+        pdfReader.readAsArrayBuffer(pdfBlob);
+      } else {
+        const storageRef = ref(storage, uuid());
+        const uploadTask = uploadBytesResumable(storageRef, img);
+
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+            // switch (snapshot.state) {
+            //   case "paused":
+            //     console.log("Upload is paused");
+            //     break;
+            //   case "running":
+            //     console.log("Upload is running");
+            //     break;
+            // }
+          },
+          (error) => {
+            alert("first error" + error.message);
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(
+              async (downloadURL) => {
+                await updateDoc(doc(db, "chats", data.chatId), {
+                  messages: arrayUnion({
+                    id: uuid(),
+                    text,
+                    senderId: isAuth.uid,
+                    date: Timestamp.now(),
+                    img: downloadURL,
+                  }),
+                });
+              }
+            );
+          }
+        );
+      }
     } else {
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
@@ -85,7 +168,6 @@ const Input = () => {
     setText(null);
     setImg(null);
   };
-
   return (
     <>
       <div className="">
