@@ -12,7 +12,7 @@ const Chat = ({ sidebarOpen}) => {
         </div>
       </div>
       <div
-        className={`chat-inputs btn-group position-fixed end-0 bottom-0 d-flex align-items-start p-3 ${
+        className={`chat-inputs btn-group bg-dark bg-opacity-25 position-fixed end-0 bottom-0 d-flex align-items-start p-3 ${
           sidebarOpen ? "sidebar-open" : "sidebar-close"
         }`}
       >

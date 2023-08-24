@@ -147,7 +147,8 @@ const SideBar = ({ h_u_Select }) => {
 
 
   return (
-    <div className="mt-3 position-absolute top-0 start-0 mt-5">
+    <div className="mt-3 position-absolute top-0 start-0">
+    <h2 className="text-center">Chat App</h2>
       <div className="btn-group d-flex justify-content-center mt-3 p-3">
         <input
           className="form-control shadow-none rounded-end-0"
@@ -172,7 +173,7 @@ const SideBar = ({ h_u_Select }) => {
       <ul className="list-group p-1">
         {users &&
           users.map((user) => (
-            <div className="rounded-0 border-1 list-group-item bg-transparent text-light d-flex justify-content-between">
+            <div className="rounded-4 mb-2 border-3 list-group-item bg-transparent text-light d-flex justify-content-between">
               <div className="d-flex">
                 <img src={user.photoURL} height="30px" width="30px" alt="" />
                 <div className="px-3">{user.displayName}</div>
@@ -195,11 +196,11 @@ const SideBar = ({ h_u_Select }) => {
             ?.sort((a, b) => b[1].date - a[1].date)
             .map((chat) => (
               <div
-                className="userChat btn rounded-0 border-1 list-group-item bg-transparent text-light d-flex justify-content-between"
+                className="userChat btn rounded-4 mb-2 border-3 list-group-item bg-transparent text-light d-flex justify-content-between"
                 key={chat[0]}
                 onClick={() => handleSelectforchat(chat[1].userInfo)} // --------------------
               >
-                <div className="d-flex justify-content-start">
+                <div className="d-flex align-items-center justify-content-start">
                   <img
                     src={chat[1].userInfo.photoURL}
                     height="30px"

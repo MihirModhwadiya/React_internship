@@ -14,7 +14,7 @@ const Header = ({handleCall}) => {
     handleCall();
   };
   return (
-    <nav className="nav p-1 pe-3">
+    <nav className=" nav p-1 pe-3">
       <div className="btn-group" type="button">
         <button onClick={funnCallStatus} className="btn btn-light px-2">
           <FontAwesomeIcon icon={faPhone} />
@@ -35,7 +35,7 @@ const Header = ({handleCall}) => {
             />
           </div>
           <div className="d-flex align-items-center ps-3">
-            <h5 className="text-light">{curruser.displayName}</h5>
+            <h5 className="text-dark">{curruser.displayName}</h5>
           </div>
         </div>
       ) : null}

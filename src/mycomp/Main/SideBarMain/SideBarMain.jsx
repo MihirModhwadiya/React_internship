@@ -23,7 +23,7 @@ const SideBarMain = ({ onToggle }) => {
   const { isAuth } = useContext(AuthContext);
 
   return (
-    <div id="hh" className="bg-primary">
+    <div id="hh" className="bg-primary bg-gradient">
       <div className="text-light" style={{ height: "700vh" }}>
         {isAuth ? (
           <div>

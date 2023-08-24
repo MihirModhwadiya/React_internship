@@ -1,4 +1,4 @@
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { faFile, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useState } from "react";
 import { ChatContext } from "../ChatContext/ChatContext";
@@ -150,7 +150,8 @@ const Input = () => {
         />
 
         <label htmlFor="file" className="btn btn-light">
-          file
+          {/* file */}
+          <FontAwesomeIcon icon={faFile} />
         </label>
       </div>
 
@@ -158,11 +159,11 @@ const Input = () => {
         value={text == null ? "" : text}
         type="text"
         placeholder="Message"
-        className="form-control shadow-none width-control"
+        className="mx-2 form-control shadow-none width-control"
         onChange={(e) => setText(e.target.value)}
       />
       {(text === null || text[0] === " " || text === "") && !img ? null : (
-        <button onClick={handleSend} className="btn btn-light">
+        <button onClick={handleSend} className="btn btn-light rounded-3">
           <FontAwesomeIcon icon={faPaperPlane} />
         </button>
       )}

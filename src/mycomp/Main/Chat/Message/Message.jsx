@@ -4,6 +4,8 @@ import { AuthContext } from "../../../Auth/AuthContext/AuthContext";
 import { ChatContext } from "../ChatContext/ChatContext";
 import { pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFile } from "@fortawesome/free-solid-svg-icons";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -24,7 +26,6 @@ const Message = ({ message }) => {
 
   // console.log(message);
 
-  
   // useEffect(() => {
   // const showNotifi = () =>{
   //   showNoti("New Message", {
@@ -40,22 +41,30 @@ const Message = ({ message }) => {
         // ref={reff}
         className={`message ${
           message.senderId === isAuth.uid
-            ? "d-flex align-items-start justify-content-end py-3"
-            : "d-flex align-items-start justify-content-start py-3"
+            ? "d-flex justify-content-end py-3"
+            : "d-flex justify-content-start py-3"
         }`}
       >
         {message.senderId === isAuth.uid ? null : ( // <img src={isAuth.photoURL} width="20px" height={"20px"} alt="" />
-          <img src={curruser.photoURL} width="20px" height={"20px"} alt="" />
+          <img
+            className="rounded-circle border border-1 border-dark"
+            src={curruser.photoURL}
+            width="30px"
+            height={"30px"}
+            alt=""
+          />
         )}
-        <h3
-          className="me-2 text-break"
-          style={{
-            maxWidth: "40%",
-            wordWrap: "break-word",
-          }}
-        >
-          {message.text && message.text}
-        </h3>
+        {message.text && (
+          <p
+            className="text-break border border-3 py-1 px-3 bg-primary bg-opacity-25 rounded-4"
+            style={{
+              maxWidth: "40%",
+              wordWrap: "break-word",
+            }}
+          >
+            {message.text && message.text}
+          </p>
+        )}
 
         {message.img && (
           <img
@@ -66,30 +75,34 @@ const Message = ({ message }) => {
         )}
 
         {message.imageURL && (
-          <a href={message.imageURL} target="_blank" rel="noopener noreferrer" className="message-pdf">
-            {/* <img
-            src={message === undefined ? null : message.pdfPreview}
-            width="200px"
-            alt=""
-            onClick={(message.pdfURL).print} */}
-          {/* /> */}
-          <h3>{message.docs}</h3>
+          <a
+            href={message.imageURL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="message-pdf"
+          >
+            <h3>{message.docs}</h3>
           </a>
         )}
         {message.applicationURL && (
-          <a href={message.applicationURL} target="_blank" rel="noopener noreferrer" className="message-pdf">
-            {/* <img
-            src={message === undefined ? null : message.pdfPreview}
-            width="200px"
-            alt=""
-            onClick={(message.pdfURL).print} */}
-          {/* /> */}
-          <h3>{message.docs}</h3>
+          <a
+            href={message.applicationURL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="message-pdf border border-3 bg-dark bg-opacity-25 text-decoration-none"
+          >
+            <FontAwesomeIcon className="p-3 px-5" icon={faFile} />
           </a>
         )}
         {message.senderId === isAuth.uid ? (
-          <div className="">
-          <img src={isAuth.photoURL} width="20px" height={"20px"} alt="" />
+          <div className="ms-3">
+            <img
+              className="rounded-circle border border-1 border-dark"
+              src={isAuth.photoURL}
+              width="30px"
+              height={"30px"}
+              alt=""
+            />
           </div>
         ) : null}
         <br />

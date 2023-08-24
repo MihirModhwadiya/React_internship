@@ -110,6 +110,8 @@ const Authcomp = () => {
           onSubmit={signUp}
           className="padd container border border-dark shadow-lg"
         >
+          <h1 className="text-center pb-3 text-light">Sign-Up</h1>
+
           <input
             required
             className="form-control my-3 shadow-none"
@@ -141,14 +143,14 @@ const Authcomp = () => {
             placeholder="Confirm Password"
           />
           <div className="text-center d-flex justify-content-center">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-light">
               Sign up
             </button>
           </div>
-          <div className="text-center d-flex justify-content-center">
+          <div className="text-center d-flex justify-content-center test-light">
             <p>
-              create account?
-              <Link to="/AuthLogIn">Sign In</Link>
+              Have an Account?
+              <Link to="/AuthLogIn" className="text-light">Sign In</Link>
             </p>
           </div>
         </form>

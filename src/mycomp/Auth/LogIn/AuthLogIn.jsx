@@ -33,12 +33,13 @@ const Authcomp = () => {
   };
 
   return (
-    <div className="d-flex">
+    <div className="d-flex bgg">
       <div className="widthh position-absolute top-50 start-50 translate-middle">
         <form
           onSubmit={signIn}
           className="padd container border border-dark shadow-lg p-5"
-        >
+          >
+          <h1 className="text-center pb-3 text-light">Sign-In</h1>
           <input
             required
             className="form-control my-3 shadow-none"
@@ -56,14 +57,14 @@ const Authcomp = () => {
             {/* <button onClick={signUp} className="btn btn-primary">
               Sign up
             </button> */}
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-light">
               Sign In
             </button>
           </div>
           <div className="text-center d-flex justify-content-center">
             <p>
-              create account?
-              <Link to="/Authcomp">Sign Up</Link>
+              Create Account?
+              <Link to="/Authcomp" className="text-light">Sign Up</Link>
             </p>
           </div>
         </form>

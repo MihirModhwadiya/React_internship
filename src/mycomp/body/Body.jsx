@@ -33,7 +33,7 @@ function Body() {
     <>
       {/* {callSatus === false ? ( */}
         <nav
-          className={`navbar bg-dark d-flex position-fixed end-0 top-0 justify-content-end ${
+          className={`navbar d-flex position-fixed end-0 top-0 justify-content-end bg-dark bg-opacity-25 ${
             sidebarOpen ? "ch-body-open ch-body-open-nv" : "ch-body-close-nv"
           }`}
           style={{ zIndex: 10 }}
@@ -47,9 +47,10 @@ function Body() {
               initial="closed"
               animate={sidebarOpen ? "open" : "closed"}
               transition={transition}
-              className={`collapse sidebar bg-dark ${
+              className={`collapse sidebar bg-primary bg-gradient ${
                 sidebarOpen ? "show" : ""
               }`}
+              style={{ zIndex: 10 }}
               id="collapseExample"
             >
               <div style={{ zIndex: 9 }}>
