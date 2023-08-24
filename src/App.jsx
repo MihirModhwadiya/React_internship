@@ -1,12 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Authcomp from "./mycomp/Auth/Authcomp";
 import AuthLogIn from "./mycomp/Auth/LogIn/AuthLogIn";
 import Body from "./mycomp/body/Body";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./mycomp/Auth/AuthContext/AuthContext";
 
+
+function requestNotificationPermission() {
+  if (Notification.permission !== "granted") {
+    Notification.requestPermission();
+  }
+}
+
 function App() {
   const { isAuth } = useContext(AuthContext);
+  // const [noti,setNoti] = useState(false);
 
   const ProtectedRoute = ({ children }) => {
     if (!isAuth) {
@@ -14,6 +22,10 @@ function App() {
     }
     return children;
   };
+
+  useEffect(() => {
+    requestNotificationPermission();
+  }, []);
 
   return (
     <>
@@ -36,7 +48,7 @@ function App() {
               path="/Body"
               element={
                 <ProtectedRoute>
-                  <Body />
+                  <Body/>
                 </ProtectedRoute>
               }
             />

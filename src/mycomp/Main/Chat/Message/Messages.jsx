@@ -17,11 +17,10 @@ const Messages = () => {
     };
   }, [data.chatId]);
 
+
   return (
     <div>
-      {messages && messages.map((m) => (
-        <Message message={m} key={m.id} />
-      ))}
+      {messages && messages.map((m) => <Message message={m} key={m.id} />)}
     </div>
   );
 };

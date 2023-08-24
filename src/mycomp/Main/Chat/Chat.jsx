@@ -2,7 +2,7 @@ import React from "react";
 import "./Chat.css";
 import Messages from "./Message/Messages";
 import Input from "./Input/Input";
-const Chat = ({ sidebarOpen }) => {
+const Chat = ({ sidebarOpen}) => {
 
   return (
     <>

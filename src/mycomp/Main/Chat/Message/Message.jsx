@@ -7,6 +7,12 @@ import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
+// function showNoti(title, options) {
+//   if (Notification.permission === "granted") {
+//     new Notification(title, options);
+//   }
+// }
+
 const Message = ({ message }) => {
   const { isAuth } = useContext(AuthContext);
   const { curruser } = useContext(ChatContext);
@@ -15,6 +21,18 @@ const Message = ({ message }) => {
   // useEffect(() => {
   //   reff.current.scrollIntoView({ behavior: "smooth" });
   // }, [message]);
+
+  // console.log(message);
+
+  
+  // useEffect(() => {
+  // const showNotifi = () =>{
+  //   showNoti("New Message", {
+  //     body: "new message"
+  //   })
+  // }
+  //   showNotifi();
+  // }, [messages]);
 
   return (
     <>
@@ -30,7 +48,7 @@ const Message = ({ message }) => {
           <img src={curruser.photoURL} width="20px" height={"20px"} alt="" />
         )}
         <h3
-          class="me-2 text-break"
+          className="me-2 text-break"
           style={{
             maxWidth: "40%",
             wordWrap: "break-word",
@@ -47,14 +65,26 @@ const Message = ({ message }) => {
           />
         )}
 
-        {message.pdfPreview && (
-          <a href={message.pdfURL} download="testpdf.pdf"  target="_blank" rel="noopener noreferrer" className="message-pdf">
-            <img
+        {message.imageURL && (
+          <a href={message.imageURL} target="_blank" rel="noopener noreferrer" className="message-pdf">
+            {/* <img
             src={message === undefined ? null : message.pdfPreview}
             width="200px"
             alt=""
-            onClick={(message.pdfURL).print}
-          />
+            onClick={(message.pdfURL).print} */}
+          {/* /> */}
+          <h3>{message.docs}</h3>
+          </a>
+        )}
+        {message.applicationURL && (
+          <a href={message.applicationURL} target="_blank" rel="noopener noreferrer" className="message-pdf">
+            {/* <img
+            src={message === undefined ? null : message.pdfPreview}
+            width="200px"
+            alt=""
+            onClick={(message.pdfURL).print} */}
+          {/* /> */}
+          <h3>{message.docs}</h3>
           </a>
         )}
         {message.senderId === isAuth.uid ? (

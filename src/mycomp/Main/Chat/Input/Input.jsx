@@ -25,39 +25,15 @@ const Input = () => {
   const { isAuth } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
   // const [pdfUrl, setPdfUrl] = useState(null);
-
+  let storageRef;
   const handleSend = async () => {
     if (img) {
-      if (img.type === "application/pdf") {
-        // Handle PDF file
-        const pdfBlob = new Blob([img], { type: "application/pdf" });
-        const pdfReader = new FileReader();
-
-        let unique = uuid();
-
-        pdfReader.onload = async (e) => {
-          const typedArray = new Uint8Array(e.target.result);
-          const loadingTask = pdfjs.getDocument(typedArray);
-
-          loadingTask.promise.then(async (pdfDocument) => {
-            // Generate a PDF preview image (first page)
-            const pdfCanvas = document.createElement("canvas");
-            const pdfContext = pdfCanvas.getContext("2d");
-            const pdfPage = await pdfDocument.getPage(1);
-            const viewport = pdfPage.getViewport({ scale: 1 });
-            pdfCanvas.width = viewport.width;
-            pdfCanvas.height = viewport.height;
-            await pdfPage.render({ canvasContext: pdfContext, viewport })
-              .promise;
-
-            const pdfPreviewDataUrl = pdfCanvas.toDataURL("image/jpeg");
-            imgpreviewURL = pdfPreviewDataUrl;
-          });
-        };
-
-        const storageRef = ref(storage, unique);
-
-        const uploadTask = uploadBytesResumable(storageRef, pdfBlob);
+      if (img.type.startsWith("application/")) {
+        console.log(img);
+        const fileType = "." + img.name.split(".").pop().toLowerCase();
+        
+        storageRef = ref(storage, uuid() + fileType);
+        const uploadTask = uploadBytesResumable(storageRef, img);
 
         uploadTask.on(
           "state_changed",
@@ -65,42 +41,36 @@ const Input = () => {
             const progress =
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             console.log("Upload is " + progress + "% done");
-            // switch (snapshot.state) {
-            //   case "paused":
-            //     console.log("Upload is paused");
-            //     break;
-            //   case "running":
-            //     console.log("Upload is running");
-            //     break;
-            // }
           },
           (error) => {
-            alert("first error" + error.message);
+            alert("Error uploading file: " + error.message);
           },
           () => {
-            getDownloadURL(uploadTask.snapshot.ref).then(async (pdfUrl) => {
-              // Store the PDF URL in the state
-              // setPdfUrl(pdfUrl);
-              // console.log(pdfUrl);
-              await updateDoc(doc(db, "chats", data.chatId), {
-                messages: arrayUnion({
-                  id: unique,
+            getDownloadURL(uploadTask.snapshot.ref).then(
+              async (downloadURL) => {
+                console.log(img.type);
+                const messageType = img.type.startsWith("application/")
+                  ? "application"
+                  : "image";
+                const messageData = {
+                  id: uuid(),
                   text,
                   senderId: isAuth.uid,
                   date: Timestamp.now(),
-                  pdfPreview: imgpreviewURL, // Store the PDF preview
-                  pdfURL: pdfUrl, // Store the PDF URL
-                }),
-              });
-              // ... (existing code)
-            });
+                };
+                if (messageType === "application") {
+                  messageData.applicationURL = downloadURL;
+                } else {
+                  messageData.imageURL = downloadURL;
+                }
+                messageData.docs = "Docs";
+                await updateDoc(doc(db, "chats", data.chatId), {
+                  messages: arrayUnion(messageData),
+                });
+              }
+            );
           }
         );
-
-        // setPdfUrl(null);
-        setText(null);
-        setImg(null);
-        pdfReader.readAsArrayBuffer(pdfBlob);
       } else {
         const storageRef = ref(storage, uuid());
         const uploadTask = uploadBytesResumable(storageRef, img);

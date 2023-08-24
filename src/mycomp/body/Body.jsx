@@ -64,7 +64,7 @@ function Body() {
             >
               <div className={`chat w-100`}>
                 {userSelect === true ? (
-                  <Chat sidebarOpen={sidebarOpen} />
+                  <Chat sidebarOpen={sidebarOpen}/>
                 ) : null}
                 
               </div>
