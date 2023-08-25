@@ -39,6 +39,11 @@ const SideBar = ({ h_u_Select }) => {
       where("displayName", ">=", username),
       where("displayName", "<=", charr)
     );
+
+    if ("Notification" in window && Notification.permission !== "granted") {
+      Notification.requestPermission();
+    }
+
     try {
       if (!username) {
         setUsers([]);
@@ -65,7 +70,6 @@ const SideBar = ({ h_u_Select }) => {
   // const handleKey = () => {
   //   handleSearch();
   // };
-
   const handleSelect = async (user) => {
     if (user) {
       const combinedId =
@@ -210,6 +214,9 @@ const SideBar = ({ h_u_Select }) => {
                   <div className="userChatInfo">
                     <div className="px-3">{chat[1].userInfo.displayName}</div>
                   </div>
+                  {/* <div className="userChatInfo">
+                    <div className="px-3">{chat[1].lastMessage?.text}</div>
+                  </div> */}
                 </div>
                 <div className="userChatInfo d-flex justify-content-end">
                   <button

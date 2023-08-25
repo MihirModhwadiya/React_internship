@@ -7,6 +7,7 @@ import {
   Timestamp,
   arrayUnion,
   doc,
+  getDoc,
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
@@ -31,7 +32,7 @@ const Input = () => {
       if (img.type.startsWith("application/")) {
         console.log(img);
         const fileType = "." + img.name.split(".").pop().toLowerCase();
-        
+
         storageRef = ref(storage, uuid() + fileType);
         const uploadTask = uploadBytesResumable(storageRef, img);
 
@@ -134,6 +135,8 @@ const Input = () => {
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
+    const ress = await getDoc(doc(db, "userChats", data.user.uid));
+    console.log(ress);
 
     setText(null);
     setImg(null);

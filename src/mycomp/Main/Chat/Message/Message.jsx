@@ -9,11 +9,6 @@ import { faFile } from "@fortawesome/free-solid-svg-icons";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-// function showNoti(title, options) {
-//   if (Notification.permission === "granted") {
-//     new Notification(title, options);
-//   }
-// }
 
 const Message = ({ message }) => {
   const { isAuth } = useContext(AuthContext);
@@ -26,14 +21,6 @@ const Message = ({ message }) => {
 
   // console.log(message);
 
-  // useEffect(() => {
-  // const showNotifi = () =>{
-  //   showNoti("New Message", {
-  //     body: "new message"
-  //   })
-  // }
-  //   showNotifi();
-  // }, [messages]);
 
   return (
     <>
@@ -56,9 +43,9 @@ const Message = ({ message }) => {
         )}
         {message.text && (
           <p
-            className="text-break border border-3 py-1 px-3 bg-primary bg-opacity-25 rounded-4"
+            className="text-break border border-3 bg-primary bg-opacity-25 rounded-3 px-1"
             style={{
-              maxWidth: "40%",
+              maxWidth: "70%",
               wordWrap: "break-word",
             }}
           >

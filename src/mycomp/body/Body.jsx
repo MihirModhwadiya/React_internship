@@ -5,6 +5,7 @@ import SideBar from "../Main/SideBar/SideBar";
 import SideBarMain from "../Main/SideBarMain/SideBarMain";
 import Header from "../Header/Header";
 import { motion } from "framer-motion";
+import Noti from "../noti/Noti";
 
 function Body() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -66,9 +67,9 @@ function Body() {
               <div className={`chat w-100`}>
                 {userSelect === true ? (
                   <Chat sidebarOpen={sidebarOpen}/>
-                ) : null}
-                
+                  ) : null}
               </div>
+                  <Noti/>
             </main>
           </div>
     </>
