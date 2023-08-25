@@ -33,11 +33,11 @@ const Authcomp = () => {
   };
 
   return (
-    <div className="d-flex bgg">
-      <div className="widthh position-absolute top-50 start-50 translate-middle">
+    <div className="">
+      <div className="widthh position-absolute top-50 start-50 translate-middle blurr">
         <form
           onSubmit={signIn}
-          className="padd container border border-dark shadow-lg p-5"
+          className="padd container border bgg border-light rounded-5 shadow-lg p-5"
           >
           <h1 className="text-center pb-3 text-light">Sign-In</h1>
           <input

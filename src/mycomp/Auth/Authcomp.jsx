@@ -106,54 +106,54 @@ const Authcomp = () => {
   return (
     <div className="d-flex">
       <div className="widthh position-absolute top-50 start-50 translate-middle">
-        <form
-          onSubmit={signUp}
-          className="padd container border border-dark shadow-lg"
-        >
-          <h1 className="text-center pb-3 text-light">Sign-Up</h1>
-
-          <input
-            required
-            className="form-control my-3 shadow-none"
-            type="text"
-            pattern="[A-Za-z0-9]+"
-            placeholder="Username"
-          />
-          <input
-            required
-            className="form-control my-3 shadow-none"
-            type="email"
-            placeholder="Email"
-          />
-          <input
-            required
-            className="form-control my-3 shadow-none"
-            type="file"
-          />
-          <input
-            required
-            className="form-control my-3 shadow-none"
-            type="password"
-            placeholder="Password"
-          />
-          <input
-            required
-            className="form-control my-3 shadow-none"
-            type="password"
-            placeholder="Confirm Password"
-          />
-          <div className="text-center d-flex justify-content-center">
-            <button type="submit" className="btn btn-light">
-              Sign up
-            </button>
-          </div>
-          <div className="text-center d-flex justify-content-center test-light">
-            <p>
-              Have an Account?
-              <Link to="/AuthLogIn" className="text-light">Sign In</Link>
-            </p>
-          </div>
-        </form>
+        <div className="container border border-light rounded-5 shadow-lg blurr">
+          <form onSubmit={signUp} className="padd">
+            <h1 className="text-center pb-3 text-light">Sign-Up</h1>
+            <input
+              required
+              className="form-control my-3 shadow-none"
+              type="text"
+              pattern="[A-Za-z0-9]+"
+              placeholder="Username"
+            />
+            <input
+              required
+              className="form-control my-3 shadow-none"
+              type="email"
+              placeholder="Email"
+            />
+            <input
+              required
+              className="form-control my-3 shadow-none"
+              type="file"
+            />
+            <input
+              required
+              className="form-control my-3 shadow-none"
+              type="password"
+              placeholder="Password"
+            />
+            <input
+              required
+              className="form-control my-3 shadow-none"
+              type="password"
+              placeholder="Confirm Password"
+            />
+            <div className="text-center d-flex justify-content-center">
+              <button type="submit" className="btn btn-light">
+                Sign up
+              </button>
+            </div>
+            <div className="text-center d-flex justify-content-center test-light">
+              <p>
+                Have an Account?
+                <Link to="/AuthLogIn" className="text-light">
+                  Sign In
+                </Link>
+              </p>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
