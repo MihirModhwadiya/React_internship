@@ -9,12 +9,13 @@ function showNoti(title, options) {
     new Notification(title, options);
   }
 }
-
 const Noti = () => {
   const { data } = useContext(ChatContext);
   const { curruser } = useContext(ChatContext);
   const [lastmsg, setLastmsg] = useState(null);
-
+  const [notificationPermission, setNotificationPermission] = useState(
+    Notification.permission
+  );
   const chatId = data.chatId;
 
   useEffect(() => {
@@ -33,29 +34,40 @@ const Noti = () => {
     };
     let flag;
 
-    // Set up a listener to detect new messages
     if (curruser.uid != undefined) {
       flag = 0;
       const unsubscribe = onSnapshot(doc(db, "userChats", curruser.uid), () => {
         getd();
-        // Check if a new message was sent and trigger a notification
-        if (lastmsg != null && flag === 0) {
+        if (
+          lastmsg != null &&
+          flag === 0 &&
+          Notification.permission === "granted"
+        ) {
           showNoti("New Message", {
             body: lastmsg,
             icon: curruser.photoURL,
+          });
+        } else {
+          Notification.requestPermission().then((permission) => {
+            if (lastmsg != null && flag === 0 && permission === "granted") {
+              showNoti("New Message", {
+                body: lastmsg,
+                icon: curruser.photoURL,
+              });
+            }
           });
         }
         flag++;
       });
 
       return () => {
-        // Clean up the listener when the component unmounts
         unsubscribe();
       };
     }
-  }, [chatId, data.text, lastmsg]);
+  }, [chatId, lastmsg]);
+  console.log(data);
 
-  return <div></div>; // The component doesn't need to render anything
+  return <div></div>;
 };
 
 export default Noti;

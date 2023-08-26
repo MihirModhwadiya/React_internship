@@ -35,8 +35,8 @@ const SideBar = ({ h_u_Select }) => {
 
     const q = query(
       collection(db, "users"),
-      // where("displayName", "==", username)
-      where("displayName", ">=", username),
+      // where("displayName", "==", username) // for perfect match
+      where("displayName", ">=", username), // for first letter match
       where("displayName", "<=", charr)
     );
 
@@ -55,21 +55,11 @@ const SideBar = ({ h_u_Select }) => {
         });
         setUsers(matchingUsers);
       }
-      // if (username === "" || username === null || username === undefined) {
-      //   setUser(null);
-      // } else {
-      //   const querySnapshot = await getDocs(q);
-      //   querySnapshot.forEach((doc) => {
-      //     setUser(doc.data());
-      //   });
-      // }
     } catch (error) {
       alert(error.message);
     }
   };
-  // const handleKey = () => {
-  //   handleSearch();
-  // };
+  
   const handleSelect = async (user) => {
     if (user) {
       const combinedId =
@@ -133,15 +123,13 @@ const SideBar = ({ h_u_Select }) => {
     try {
       await deleteDoc(doc(db, "chats", combinedId));
 
-      // Remove the chat entry from the user's chat list
       await updateDoc(doc(db, "userChats", isAuth.uid), {
-        [combinedId]: deleteField(), // Use `deleteField()` to remove the chat entry
+        [combinedId]: deleteField(),
       });
 
-      // Remove the chat entry from the other user's chat list
       const otherUserId = combinedId.replace(isAuth.uid, "");
       await updateDoc(doc(db, "userChats", otherUserId), {
-        [combinedId]: deleteField(), // Use `deleteField()` to remove the chat entry
+        [combinedId]: deleteField(),
       });
       window.location.reload();
     } catch (error) {
@@ -163,16 +151,6 @@ const SideBar = ({ h_u_Select }) => {
         <button className="btn btn-light">
           <FontAwesomeIcon icon={faSearch} />
         </button>
-        {/* <input
-        value={username ? username : ""}
-          className="form-control shadow-none rounded-end-0"
-          type="text"
-          placeholder="Search"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <button onClick={handleKey} className="btn btn-light">
-          <FontAwesomeIcon icon={faSearch} />
-        </button> */}
       </div>
       <ul className="list-group p-1">
         {users &&
@@ -202,7 +180,7 @@ const SideBar = ({ h_u_Select }) => {
               <div
                 className="userChat btn rounded-4 mb-2 border-3 list-group-item bg-transparent text-light d-flex justify-content-between"
                 key={chat[0]}
-                onClick={() => handleSelectforchat(chat[1].userInfo)} // --------------------
+                onClick={() => handleSelectforchat(chat[1].userInfo)}
               >
                 <div className="d-flex align-items-center justify-content-start">
                   <img
@@ -222,8 +200,8 @@ const SideBar = ({ h_u_Select }) => {
                   <button
                     className="btn btn-danger"
                     onClick={(e) => {
-                      e.stopPropagation(); // Prevent the click event from triggering the parent click event
-                      removechatlist(chat[0]); // Pass the combinedId to the function
+                      e.stopPropagation();
+                      removechatlist(chat[0]);
                     }}
                   >
                     <FontAwesomeIcon icon={faClose} />

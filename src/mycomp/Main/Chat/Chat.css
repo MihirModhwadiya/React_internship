@@ -12,10 +12,8 @@
   display: none;
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
 .chat-body {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
 }
 
 .sidebar-open {

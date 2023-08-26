@@ -14,7 +14,6 @@ function requestNotificationPermission() {
 
 function App() {
   const { isAuth } = useContext(AuthContext);
-  // const [noti,setNoti] = useState(false);
 
   const ProtectedRoute = ({ children }) => {
     if (!isAuth) {

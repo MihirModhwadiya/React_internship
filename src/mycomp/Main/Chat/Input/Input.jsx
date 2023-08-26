@@ -25,7 +25,6 @@ const Input = () => {
   let imgpreviewURL;
   const { isAuth } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
-  // const [pdfUrl, setPdfUrl] = useState(null);
   let storageRef;
   const handleSend = async () => {
     if (img) {
@@ -129,12 +128,12 @@ const Input = () => {
       [data.chatId + ".date"]: serverTimestamp(),
     });
 
-    await updateDoc(doc(db, "userChats", data.user.uid), {
-      [data.chatId + ".lastMessage"]: {
-        text,
-      },
-      [data.chatId + ".date"]: serverTimestamp(),
-    });
+    // await updateDoc(doc(db, "userChats", data.user.uid), { // for storing message data of user itself
+    //   [data.chatId + ".lastMessage"]: {
+    //     text,
+    //   },
+    //   [data.chatId + ".date"]: serverTimestamp(),
+    // });
     const ress = await getDoc(doc(db, "userChats", data.user.uid));
     console.log(ress);
 

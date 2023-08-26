@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-// import React, { useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../../../Auth/AuthContext/AuthContext";
 import { ChatContext } from "../ChatContext/ChatContext";
 import { pdfjs } from "react-pdf";
@@ -32,7 +31,7 @@ const Message = ({ message }) => {
             : "d-flex justify-content-start py-3"
         }`}
       >
-        {message.senderId === isAuth.uid ? null : ( // <img src={isAuth.photoURL} width="20px" height={"20px"} alt="" />
+        {message.senderId === isAuth.uid ? null : (
           <img
             className="rounded-circle border border-1 border-dark"
             src={curruser.photoURL}
