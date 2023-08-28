@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/React_internship/static/css/main.9fe0f068.css",
+    "main.js": "/React_internship/static/js/main.7d3ed533.js",
+    "static/js/787.e752235b.chunk.js": "/React_internship/static/js/787.e752235b.chunk.js",
+    "static/media/bg.svg": "/React_internship/static/media/bg.f7bc3d7561907416ecfc.svg",
+    "index.html": "/React_internship/index.html",
+    "main.9fe0f068.css.map": "/React_internship/static/css/main.9fe0f068.css.map",
+    "main.7d3ed533.js.map": "/React_internship/static/js/main.7d3ed533.js.map",
+    "787.e752235b.chunk.js.map": "/React_internship/static/js/787.e752235b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9fe0f068.css",
+    "static/js/main.7d3ed533.js"
+  ]
+}
