@@ -5,7 +5,6 @@ import Body from "./mycomp/body/Body";
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthContext } from "./mycomp/Auth/AuthContext/AuthContext";
 
-
 function requestNotificationPermission() {
   if (Notification.permission !== "granted") {
     Notification.requestPermission();
@@ -40,19 +39,21 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route exact path="/Authcomp" element={<Authcomp />} />
-            <Route exact path="/AuthLogIn" element={<AuthLogIn />} />
             <Route
               exact
               path="/Body"
               element={
                 <ProtectedRoute>
-                  <Body/>
+                  <Body />
                 </ProtectedRoute>
               }
             />
           </Routes>
         </div>
+        <Routes>
+          <Route exact path="/Authcomp" element={<Authcomp />} />
+          <Route exact path="/AuthLogIn" element={<AuthLogIn />} />
+        </Routes>
       </HashRouter>
     </>
   );
