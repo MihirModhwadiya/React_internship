@@ -28,7 +28,7 @@ function App() {
   return (
     <>
       <HashRouter>
-        <div className="d-flex position-fixed bottom-0">
+        <div className="d-flex position-fixed bottom-0 top-0">
           <Routes>
             <Route
               exact
