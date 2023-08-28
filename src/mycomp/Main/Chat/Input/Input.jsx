@@ -22,7 +22,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 const Input = () => {
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
-  let imgpreviewURL;
   const { isAuth } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
   let storageRef;

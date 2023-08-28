@@ -6,7 +6,7 @@ const Chat = ({ sidebarOpen}) => {
 
   return (
     <>
-      <div className={`chat-block d-flex pt-5`}>
+      <div className={`chat-block pt-5`}>
         <div className="chat-body">
           <Messages/>
         </div>

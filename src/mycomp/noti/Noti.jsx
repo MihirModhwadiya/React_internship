@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { ChatContext } from "../Main/Chat/ChatContext/ChatContext";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { db } from "../../config/firebase";
-import { AuthContext } from "../Auth/AuthContext/AuthContext";
 
 function showNoti(title, options) {
   if (Notification.permission === "granted") {
@@ -13,9 +12,6 @@ const Noti = () => {
   const { data } = useContext(ChatContext);
   const { curruser } = useContext(ChatContext);
   const [lastmsg, setLastmsg] = useState(null);
-  const [notificationPermission, setNotificationPermission] = useState(
-    Notification.permission
-  );
   const chatId = data.chatId;
 
   useEffect(() => {
@@ -34,7 +30,7 @@ const Noti = () => {
     };
     let flag;
 
-    if (curruser.uid != undefined) {
+    if (curruser.uid !== undefined) {
       flag = 0;
       const unsubscribe = onSnapshot(doc(db, "userChats", curruser.uid), () => {
         getd();
@@ -65,7 +61,6 @@ const Noti = () => {
       };
     }
   }, [lastmsg]);
-  console.log(data);
 
   return <div></div>;
 };

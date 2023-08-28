@@ -14,7 +14,7 @@ const Header = ({handleCall}) => {
     handleCall();
   };
   return (
-    <nav className=" nav p-1 pe-3">
+    <nav className=" nav p-1">
       <div className="btn-group" type="button">
         <button onClick={funnCallStatus} className="btn btn-light px-2">
           <FontAwesomeIcon icon={faPhone} />
@@ -24,7 +24,7 @@ const Header = ({handleCall}) => {
         </button>
       </div>
       {isAuth ? (
-        <div className="border-1 d-flex ps-3">
+        <div className="border-1 d-flex ps-2">
           <div className="bg-light d-flex align-items-center">
             <img
               src={curruser.photoURL}
@@ -34,7 +34,7 @@ const Header = ({handleCall}) => {
               alt=""
             />
           </div>
-          <div className="d-flex align-items-center ps-3">
+          <div className="d-flex align-items-center ps-1">
             <h5 className="text-dark">{curruser.displayName}</h5>
           </div>
         </div>
