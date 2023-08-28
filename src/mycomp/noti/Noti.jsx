@@ -64,7 +64,7 @@ const Noti = () => {
         unsubscribe();
       };
     }
-  }, [chatId, lastmsg]);
+  }, [lastmsg]);
   console.log(data);
 
   return <div></div>;
